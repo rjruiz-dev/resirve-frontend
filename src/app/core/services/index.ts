@@ -1,0 +1,11 @@
+/**
+ * Core Services - Barrel Export
+ * 
+ * Exporta todos los servicios desde un solo punto.
+ * 
+ * Uso:
+ * import { ProductService, CategoryService, ContactService } from '@core/services';
+ */
+
+export * from './api.service';
+export * from './product.service';
