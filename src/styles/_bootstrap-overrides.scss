@@ -1,0 +1,256 @@
+/**
+ * Bootstrap 5 Overrides - ReSirve
+ * 
+ * Personalización de Bootstrap para que use nuestra paleta de colores
+ * y se ajuste a la estética "Mercado de Pulgas Moderno"
+ */
+
+@import 'variables';
+
+// ============================================
+// COLORES PRIMARIOS DE BOOTSTRAP
+// ============================================
+
+// Reemplazar los colores por defecto de Bootstrap
+$primary: $color-terracota;
+$secondary: $color-verde-musgo;
+$success: $color-verde-musgo;
+$warning: $color-mostaza;
+$danger: #D9534F;
+$info: #5BC0DE;
+$light: $color-crema;
+$dark: $color-carbon;
+
+// ============================================
+// TIPOGRAFÍA
+// ============================================
+
+$font-family-sans-serif: $font-body;
+$font-family-base: $font-body;
+$headings-font-family: $font-display;
+$headings-font-weight: $font-weight-bold;
+
+$font-size-base: $font-size-base;
+$h1-font-size: $h1-size;
+$h2-font-size: $h2-size;
+$h3-font-size: $h3-size;
+$h4-font-size: $h4-size;
+$h5-font-size: $h5-size;
+$h6-font-size: $h6-size;
+
+// ============================================
+// ESPACIADO Y GRID
+// ============================================
+
+$spacer: $spacing-md;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+);
+
+// ============================================
+// COMPONENTES
+// ============================================
+
+// Borders
+$border-radius: $border-radius-md;
+$border-radius-sm: $border-radius-sm;
+$border-radius-lg: $border-radius-lg;
+$border-color: $border-color;
+
+// Cards
+$card-bg: $bg-secondary;
+$card-border-radius: $border-radius-md;
+$card-border-color: transparent;
+$card-box-shadow: $shadow-sm;
+$card-cap-bg: transparent;
+
+// Buttons
+$btn-border-radius: $btn-border-radius;
+$btn-padding-y: $btn-padding-y;
+$btn-padding-x: $btn-padding-x;
+$btn-font-weight: $font-weight-semibold;
+$btn-box-shadow: none;
+$btn-focus-box-shadow: 0 0 0 3px rgba($primary, 0.1);
+
+// Forms
+$input-bg: $bg-secondary;
+$input-border-color: $input-border-color;
+$input-border-radius: $input-border-radius;
+$input-focus-border-color: $input-focus-border-color;
+$input-focus-box-shadow: 0 0 0 3px rgba($primary, 0.1);
+$input-padding-y: 0.75rem;
+$input-padding-x: 1rem;
+
+// Badges
+$badge-border-radius: $border-radius-xl;
+$badge-padding-y: 0.35em;
+$badge-padding-x: 0.85em;
+$badge-font-weight: $font-weight-semibold;
+
+// Navbar
+$navbar-padding-y: $spacing-md;
+$navbar-nav-link-padding-x: $spacing-md;
+$navbar-light-color: $text-primary;
+$navbar-light-hover-color: $primary;
+$navbar-light-active-color: $primary;
+
+// Dropdowns
+$dropdown-border-radius: $border-radius-md;
+$dropdown-box-shadow: $shadow-lg;
+$dropdown-link-hover-bg: lighten($primary, 45%);
+
+// Modals
+$modal-content-border-radius: $border-radius-lg;
+$modal-content-box-shadow-xs: $shadow-xl;
+$modal-backdrop-bg: $color-carbon;
+$modal-backdrop-opacity: 0.6;
+
+// Pagination
+$pagination-color: $text-primary;
+$pagination-bg: $bg-secondary;
+$pagination-border-radius: $border-radius-sm;
+$pagination-hover-color: $text-light;
+$pagination-hover-bg: $primary;
+$pagination-hover-border-color: $primary;
+$pagination-active-color: $text-light;
+$pagination-active-bg: $primary;
+$pagination-active-border-color: $primary;
+
+// Alerts
+$alert-border-radius: $border-radius-md;
+
+// ============================================
+// IMPORTAR BOOTSTRAP
+// ============================================
+
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/variables-dark';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+
+// Layout & components
+@import 'bootstrap/scss/root';
+@import 'bootstrap/scss/reboot';
+@import 'bootstrap/scss/type';
+@import 'bootstrap/scss/images';
+@import 'bootstrap/scss/containers';
+@import 'bootstrap/scss/grid';
+@import 'bootstrap/scss/tables';
+@import 'bootstrap/scss/forms';
+@import 'bootstrap/scss/buttons';
+@import 'bootstrap/scss/transitions';
+@import 'bootstrap/scss/dropdown';
+@import 'bootstrap/scss/button-group';
+@import 'bootstrap/scss/nav';
+@import 'bootstrap/scss/navbar';
+@import 'bootstrap/scss/card';
+@import 'bootstrap/scss/accordion';
+@import 'bootstrap/scss/breadcrumb';
+@import 'bootstrap/scss/pagination';
+@import 'bootstrap/scss/badge';
+@import 'bootstrap/scss/alert';
+@import 'bootstrap/scss/progress';
+@import 'bootstrap/scss/list-group';
+@import 'bootstrap/scss/close';
+@import 'bootstrap/scss/toasts';
+@import 'bootstrap/scss/modal';
+@import 'bootstrap/scss/tooltip';
+@import 'bootstrap/scss/popover';
+@import 'bootstrap/scss/carousel';
+@import 'bootstrap/scss/spinners';
+@import 'bootstrap/scss/offcanvas';
+@import 'bootstrap/scss/placeholders';
+
+// Helpers
+@import 'bootstrap/scss/helpers';
+
+// Utilities
+@import 'bootstrap/scss/utilities/api';
+
+// ============================================
+// PERSONALIZACIONES ADICIONALES
+// ============================================
+
+// Botones con hover elevado
+.btn {
+  transition: all $transition-base;
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}
+
+// Cards con hover effect
+.card {
+  transition: all $transition-base;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-hover;
+  }
+}
+
+// Badges con colores personalizados
+.badge {
+  &.bg-disponible {
+    background-color: $color-disponible !important;
+  }
+  
+  &.bg-reservado {
+    background-color: $color-reservado !important;
+  }
+  
+  &.bg-vendido {
+    background-color: $color-vendido !important;
+  }
+}
+
+// Navbar sticky con sombra
+.navbar {
+  &.sticky-top {
+    box-shadow: $navbar-shadow;
+  }
+}
+
+// Forms con mejor UX
+.form-control,
+.form-select {
+  &:focus {
+    border-color: $input-focus-border-color;
+    box-shadow: 0 0 0 3px rgba($primary, 0.1);
+  }
+}
+
+// Pagination mejorada
+.pagination {
+  gap: $spacing-xs;
+  
+  .page-link {
+    border-radius: $border-radius-sm;
+    border: 1px solid $border-color;
+    transition: all $transition-fast;
+    
+    &:hover {
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Alertas con íconos (espacio para Bootstrap Icons)
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-md;
+}

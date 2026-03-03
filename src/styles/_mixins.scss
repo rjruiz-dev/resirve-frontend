@@ -1,0 +1,384 @@
+/**
+ * Mixins de Utilidad - ReSirve
+ * 
+ * Mixins reutilizables para mantener el código DRY
+ */
+
+@import 'variables';
+
+// ============================================
+// RESPONSIVE BREAKPOINTS
+// ============================================
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'xs' {
+    @media (min-width: $breakpoint-xs) { @content; }
+  }
+  @else if $breakpoint == 'sm' {
+    @media (min-width: $breakpoint-sm) { @content; }
+  }
+  @else if $breakpoint == 'md' {
+    @media (min-width: $breakpoint-md) { @content; }
+  }
+  @else if $breakpoint == 'lg' {
+    @media (min-width: $breakpoint-lg) { @content; }
+  }
+  @else if $breakpoint == 'xl' {
+    @media (min-width: $breakpoint-xl) { @content; }
+  }
+  @else if $breakpoint == 'xxl' {
+    @media (min-width: $breakpoint-xxl) { @content; }
+  }
+}
+
+// ============================================
+// FLEXBOX UTILITIES
+// ============================================
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+// ============================================
+// TEXTOS Y TIPOGRAFÍA
+// ============================================
+
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-truncate-lines($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin heading-display {
+  font-family: $font-display;
+  font-weight: $font-weight-bold;
+  line-height: 1.2;
+  color: $text-primary;
+}
+
+@mixin body-text {
+  font-family: $font-body;
+  font-weight: $font-weight-normal;
+  line-height: 1.6;
+  color: $text-primary;
+}
+
+// ============================================
+// EFECTOS VISUALES
+// ============================================
+
+@mixin card-shadow {
+  box-shadow: $shadow-md;
+  transition: box-shadow $transition-base;
+  
+  &:hover {
+    box-shadow: $shadow-hover;
+  }
+}
+
+@mixin elevation($level: 1) {
+  @if $level == 1 {
+    box-shadow: $shadow-sm;
+  }
+  @else if $level == 2 {
+    box-shadow: $shadow-md;
+  }
+  @else if $level == 3 {
+    box-shadow: $shadow-lg;
+  }
+  @else if $level == 4 {
+    box-shadow: $shadow-xl;
+  }
+}
+
+// Textura de papel sutil
+@mixin paper-texture {
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      rgba($color-carbon, 0.02) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba($color-carbon, 0.02) 3px
+    );
+}
+
+// Overlay oscuro
+@mixin overlay($opacity: 0.6) {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba($color-carbon, $opacity);
+    z-index: 1;
+  }
+}
+
+// ============================================
+// BOTONES
+// ============================================
+
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $btn-padding-y $btn-padding-x;
+  border: none;
+  border-radius: $btn-border-radius;
+  font-family: $font-body;
+  font-weight: $font-weight-semibold;
+  font-size: $font-size-base;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: $transition-all;
+  user-select: none;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@mixin button-variant($bg, $color: $text-light, $hover-bg: darken($bg, 10%)) {
+  @include button-base;
+  background-color: $bg;
+  color: $color;
+  
+  &:hover:not(:disabled) {
+    background-color: $hover-bg;
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: $shadow-sm;
+  }
+}
+
+// ============================================
+// ANIMACIONES
+// ============================================
+
+@mixin fade-in($duration: $animation-duration-normal) {
+  animation: fadeIn $duration $ease-in-out-smooth;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@mixin slide-up($duration: $animation-duration-normal) {
+  animation: slideUp $duration $ease-in-out-smooth;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@mixin scale-in($duration: $animation-duration-normal) {
+  animation: scaleIn $duration $ease-bounce;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// ============================================
+// FORMS
+// ============================================
+
+@mixin input-base {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid $input-border-color;
+  border-radius: $input-border-radius;
+  font-family: $font-body;
+  font-size: $font-size-base;
+  color: $text-primary;
+  background-color: $bg-secondary;
+  transition: $transition-all;
+  
+  &:focus {
+    outline: none;
+    border-color: $input-focus-border-color;
+    box-shadow: 0 0 0 3px rgba($color-terracota, 0.1);
+  }
+  
+  &::placeholder {
+    color: $text-muted;
+  }
+  
+  &:disabled {
+    background-color: $bg-tertiary;
+    cursor: not-allowed;
+  }
+}
+
+// ============================================
+// UTILIDADES DE ESPACIADO
+// ============================================
+
+@mixin container-padding {
+  padding-left: $spacing-md;
+  padding-right: $spacing-md;
+  
+  @include respond-to('md') {
+    padding-left: $spacing-xl;
+    padding-right: $spacing-xl;
+  }
+}
+
+@mixin section-spacing {
+  padding-top: $spacing-3xl;
+  padding-bottom: $spacing-3xl;
+  
+  @include respond-to('md') {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+// ============================================
+// ASPECT RATIO
+// ============================================
+
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  
+  &::before {
+    content: '';
+    display: block;
+    padding-top: ($height / $width) * 100%;
+  }
+  
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// ============================================
+// IMÁGENES
+// ============================================
+
+@mixin image-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+@mixin image-contain {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+// ============================================
+// SCROLLBARS PERSONALIZADOS
+// ============================================
+
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: $bg-tertiary;
+    border-radius: $border-radius-sm;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $color-terracota;
+    border-radius: $border-radius-sm;
+    
+    &:hover {
+      background: $terracota-dark;
+    }
+  }
+}
+
+// ============================================
+// BADGES Y PILLS
+// ============================================
+
+@mixin badge($bg-color, $text-color: $text-light) {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: $border-radius-xl;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  background-color: $bg-color;
+  color: $text-color;
+  white-space: nowrap;
+}
+
+// ============================================
+// FOCUS STATES ACCESIBLES
+// ============================================
+
+@mixin focus-outline {
+  &:focus-visible {
+    outline: 2px solid $color-terracota;
+    outline-offset: 2px;
+  }
+}

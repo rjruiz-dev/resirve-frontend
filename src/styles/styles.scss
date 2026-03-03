@@ -1,0 +1,397 @@
+/**
+ * Estilos Globales - ReSirve Frontend
+ * 
+ * Punto de entrada principal para todos los estilos
+ * Estética: "Mercado de Pulgas Moderno"
+ */
+
+// ============================================
+// IMPORTAR VARIABLES Y MIXINS
+// ============================================
+
+@import 'variables';
+@import 'mixins';
+
+// ============================================
+// IMPORTAR BOOTSTRAP PERSONALIZADO
+// ============================================
+
+@import 'bootstrap-overrides';
+
+// ============================================
+// IMPORTAR FUENTES DE GOOGLE FONTS
+// ============================================
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Work+Sans:wght@300;400;500;600;700&display=swap');
+
+// ============================================
+// IMPORTAR BOOTSTRAP ICONS
+// ============================================
+
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+// ============================================
+// RESET Y BASE STYLES
+// ============================================
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-body;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  line-height: 1.6;
+  color: $text-primary;
+  background-color: $bg-primary;
+  @include paper-texture;
+}
+
+// ============================================
+// TIPOGRAFÍA GLOBAL
+// ============================================
+
+h1, h2, h3, h4, h5, h6 {
+  @include heading-display;
+  margin-bottom: $spacing-md;
+}
+
+h1 {
+  font-size: $h1-size;
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: $h2-size;
+  }
+}
+
+h2 {
+  font-size: $h2-size;
+  
+  @media (max-width: $breakpoint-md) {
+    font-size: $h3-size;
+  }
+}
+
+h3 {
+  font-size: $h3-size;
+}
+
+h4 {
+  font-size: $h4-size;
+}
+
+h5 {
+  font-size: $h5-size;
+}
+
+h6 {
+  font-size: $h6-size;
+}
+
+p {
+  margin-bottom: $spacing-md;
+}
+
+a {
+  color: $color-terracota;
+  text-decoration: none;
+  transition: color $transition-fast;
+  
+  &:hover {
+    color: $terracota-dark;
+    text-decoration: underline;
+  }
+}
+
+// ============================================
+// UTILIDADES GLOBALES
+// ============================================
+
+// Contenedor con padding responsive
+.container-fluid-custom {
+  @include container-padding;
+}
+
+// Sección con espaciado vertical
+.section {
+  @include section-spacing;
+}
+
+// Texto truncado
+.text-truncate-2 {
+  @include text-truncate-lines(2);
+}
+
+.text-truncate-3 {
+  @include text-truncate-lines(3);
+}
+
+// Scrollbar personalizado
+.custom-scrollbar {
+  @include custom-scrollbar;
+}
+
+// ============================================
+// BACKGROUNDS ESPECIALES
+// ============================================
+
+.bg-crema {
+  background-color: $color-crema;
+}
+
+.bg-terracota {
+  background-color: $color-terracota;
+  color: $text-light;
+}
+
+.bg-verde {
+  background-color: $color-verde-musgo;
+  color: $text-light;
+}
+
+.bg-pattern {
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba($color-terracota, 0.03) 10px,
+      rgba($color-terracota, 0.03) 20px
+    );
+}
+
+// ============================================
+// GRADIENTES
+// ============================================
+
+.gradient-warm {
+  background: linear-gradient(
+    135deg,
+    $color-terracota 0%,
+    $color-mostaza 100%
+  );
+}
+
+.gradient-hero {
+  background: linear-gradient(
+    to bottom,
+    rgba($color-crema, 0.95) 0%,
+    rgba($color-crema, 0.98) 50%,
+    $color-crema 100%
+  );
+}
+
+// ============================================
+// ANIMACIONES GLOBALES
+// ============================================
+
+// Fade in al cargar
+.fade-in {
+  @include fade-in;
+}
+
+.slide-up {
+  @include slide-up;
+}
+
+.scale-in {
+  @include scale-in;
+}
+
+// Stagger animations (para listas de elementos)
+@for $i from 1 through 10 {
+  .stagger-#{$i} {
+    animation-delay: #{$i * 0.1}s;
+  }
+}
+
+// ============================================
+// LOADERS Y SPINNERS
+// ============================================
+
+.loading-spinner {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba($color-terracota, 0.2);
+  border-top-color: $color-terracota;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-dots {
+  display: inline-flex;
+  gap: $spacing-xs;
+  
+  span {
+    width: 8px;
+    height: 8px;
+    background-color: $color-terracota;
+    border-radius: 50%;
+    animation: bounce 1.4s ease-in-out infinite;
+    
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    
+    &:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+  }
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+}
+
+// ============================================
+// OVERLAYS Y MODALES
+// ============================================
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $bg-overlay;
+  z-index: $z-modal-backdrop;
+  animation: fadeIn $animation-duration-fast;
+}
+
+// ============================================
+// IMÁGENES
+// ============================================
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.img-cover {
+  @include image-cover;
+}
+
+.img-contain {
+  @include image-contain;
+}
+
+// Placeholder para imágenes que no cargan
+.img-placeholder {
+  @include flex-center;
+  background: linear-gradient(
+    135deg,
+    lighten($color-crema, 3%) 0%,
+    darken($color-crema, 3%) 100%
+  );
+  color: $text-muted;
+  
+  i {
+    font-size: 3rem;
+  }
+}
+
+// ============================================
+// SCROLLBAR GLOBAL
+// ============================================
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $bg-tertiary;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-terracota;
+  border-radius: $border-radius-sm;
+  
+  &:hover {
+    background: $terracota-dark;
+  }
+}
+
+// ============================================
+// FOCUS VISIBLE (ACCESIBILIDAD)
+// ============================================
+
+*:focus-visible {
+  outline: 2px solid $color-terracota;
+  outline-offset: 2px;
+}
+
+// ============================================
+// PRINT STYLES
+// ============================================
+
+@media print {
+  body {
+    background: white;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}
+
+// ============================================
+// DARK MODE SUPPORT (OPCIONAL - PREPARADO)
+// ============================================
+
+@media (prefers-color-scheme: dark) {
+  // Aquí podrían ir estilos para dark mode si decides implementarlo
+  // Por ahora solo preparamos la estructura
+}
+
+// ============================================
+// UTILIDADES DE ESPACIADO CUSTOM
+// ============================================
+
+.mt-section {
+  margin-top: $spacing-3xl;
+  
+  @include respond-to('md') {
+    margin-top: 5rem;
+  }
+}
+
+.mb-section {
+  margin-bottom: $spacing-3xl;
+  
+  @include respond-to('md') {
+    margin-bottom: 5rem;
+  }
+}
+
+.py-section {
+  padding-top: $spacing-3xl;
+  padding-bottom: $spacing-3xl;
+  
+  @include respond-to('md') {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
