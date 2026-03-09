@@ -10,4 +10,5 @@
 export * from './product.model';
 export * from './category.model';
 export * from './product-image.model';
+export * from './contact-request.model';
 export * from './api-response.model';
