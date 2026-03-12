@@ -6,27 +6,17 @@
  */
 
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet
+    MainLayoutComponent
   ],
   template: `
-    <div class="app-container">
-      <!-- El contenido de cada ruta se renderiza aquí -->
-      <router-outlet />
-    </div>
-  `,
-  styles: [`
-    .app-container {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-  `]
+    <app-main-layout />
+  `
 })
 export class AppComponent {
   title = 'ReSirve';
