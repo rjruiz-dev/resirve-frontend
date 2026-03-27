@@ -1,0 +1,223 @@
+@import 'variables';
+@import 'mixins';
+
+.footer {
+  background: $footer-bg;
+  color: $footer-text;
+  padding-top: $spacing-3xl;
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+  
+  @include respond-to('md') {
+    padding: 0 $spacing-xl;
+  }
+}
+
+// ============================================
+// FOOTER TOP (Columns)
+// ============================================
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-2xl;
+  padding-bottom: $spacing-2xl;
+  border-bottom: 1px solid rgba($color-crema, 0.1);
+  
+  @include respond-to('sm') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include respond-to('lg') {
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: $spacing-3xl;
+  }
+}
+
+// ============================================
+// BRAND COLUMN
+// ============================================
+
+.footer-brand {
+  margin-bottom: $spacing-lg;
+  
+  h3 {
+    font-family: $font-display;
+    font-size: 2rem;
+    font-weight: $font-weight-bold;
+    margin: 0 0 $spacing-md;
+    
+    .brand-re {
+      color: $color-terracota;
+    }
+    
+    .brand-sirve {
+      color: $color-crema;
+    }
+  }
+}
+
+.footer-tagline {
+  font-size: $font-size-sm;
+  line-height: 1.6;
+  color: rgba($footer-text, 0.8);
+  margin: 0;
+}
+
+.footer-social {
+  display: flex;
+  gap: $spacing-md;
+  margin-top: $spacing-lg;
+  
+  .social-link {
+    @include flex-center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba($color-crema, 0.1);
+    color: $footer-text;
+    transition: $transition-all;
+    
+    i {
+      font-size: 1.25rem;
+    }
+    
+    &:hover {
+      background: $color-terracota;
+      transform: translateY(-4px);
+      box-shadow: $shadow-md;
+    }
+  }
+}
+
+// ============================================
+// FOOTER COLUMNS
+// ============================================
+
+.footer-column {
+  .footer-title {
+    font-family: $font-body;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $color-crema;
+    margin: 0 0 $spacing-lg;
+  }
+}
+
+.footer-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+  li {
+    margin-bottom: $spacing-sm;
+    
+    a {
+      display: inline-block;
+      font-size: $font-size-base;
+      color: rgba($footer-text, 0.8);
+      text-decoration: none;
+      transition: $transition-all;
+      position: relative;
+      padding-left: $spacing-md;
+      
+      &::before {
+        content: '→';
+        position: absolute;
+        left: 0;
+        opacity: 0;
+        transition: $transition-all;
+      }
+      
+      &:hover {
+        color: $color-terracota;
+        padding-left: $spacing-lg;
+        
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.footer-contact {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-md;
+    font-size: $font-size-sm;
+    color: rgba($footer-text, 0.8);
+    
+    i {
+      font-size: 1.1rem;
+      color: $color-terracota;
+      margin-top: 2px;
+    }
+    
+    a {
+      color: rgba($footer-text, 0.8);
+      text-decoration: none;
+      transition: color $transition-fast;
+      
+      &:hover {
+        color: $color-terracota;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// ============================================
+// FOOTER BOTTOM
+// ============================================
+
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-xl 0;
+  
+  @include respond-to('md') {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.footer-copyright {
+  font-size: $font-size-sm;
+  color: rgba($footer-text, 0.6);
+  margin: 0;
+}
+
+.footer-legal {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  font-size: $font-size-sm;
+  
+  a {
+    color: rgba($footer-text, 0.6);
+    text-decoration: none;
+    transition: color $transition-fast;
+    
+    &:hover {
+      color: $color-terracota;
+    }
+  }
+  
+  .separator {
+    color: rgba($footer-text, 0.3);
+  }
+}
