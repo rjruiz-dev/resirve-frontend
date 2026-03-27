@@ -1,0 +1,182 @@
+@import 'variables';
+@import 'mixins';
+
+.error-alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba($color-carbon, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 10000;
+  
+  @include flex-center;
+  padding: $spacing-md;
+  
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.error-alert {
+  background: $bg-secondary;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-xl;
+  max-width: 500px;
+  width: 100%;
+  overflow: hidden;
+  
+  animation: slideUp 0.3s $ease-in-out-smooth;
+}
+
+.error-alert__header {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-md;
+  padding: $spacing-xl;
+  border-bottom: 1px solid $border-color;
+}
+
+.error-alert__icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  @include flex-center;
+  
+  i {
+    font-size: 1.5rem;
+  }
+}
+
+.error-alert__title {
+  flex: 1;
+  font-family: $font-body;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  margin: 0;
+  padding-top: 6px;
+}
+
+.error-alert__close {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: $border-radius-sm;
+  transition: $transition-all;
+  
+  @include flex-center;
+  
+  i {
+    font-size: 1rem;
+    color: $text-secondary;
+  }
+  
+  &:hover {
+    background: rgba($color-carbon, 0.05);
+  }
+}
+
+.error-alert__details {
+  padding: $spacing-lg $spacing-xl;
+  
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    
+    li {
+      position: relative;
+      padding-left: $spacing-lg;
+      margin-bottom: $spacing-sm;
+      font-size: $font-size-sm;
+      color: $text-secondary;
+      line-height: 1.5;
+      
+      &::before {
+        content: '•';
+        position: absolute;
+        left: 0;
+        color: currentColor;
+      }
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.error-alert__actions {
+  padding: $spacing-lg $spacing-xl;
+  
+  .btn-dismiss {
+    @include button-base;
+    width: 100%;
+    background: $color-terracota;
+    color: $text-light;
+    
+    &:hover:not(:disabled) {
+      background: $terracota-dark;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// ============================================
+// VARIANTS
+// ============================================
+
+.error-alert--error {
+  .error-alert__icon {
+    background: rgba($color-danger, 0.1);
+    
+    i {
+      color: $color-danger;
+    }
+  }
+}
+
+.error-alert--warning {
+  .error-alert__icon {
+    background: rgba($color-warning, 0.1);
+    
+    i {
+      color: $color-warning;
+    }
+  }
+}
+
+.error-alert--info {
+  .error-alert__icon {
+    background: rgba($color-info, 0.1);
+    
+    i {
+      color: $color-info;
+    }
+  }
+}
+
+// ============================================
+// ANIMATIONS
+// ============================================
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
