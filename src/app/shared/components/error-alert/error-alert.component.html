@@ -1,0 +1,36 @@
+@if (errorService.currentError(); as error) {
+  <div class="error-alert-overlay" (click)="closeAlert()">
+    <div class="error-alert" [class]="'error-alert--' + error.type" (click)="$event.stopPropagation()">
+      
+      <!-- Header -->
+      <div class="error-alert__header">
+        <div class="error-alert__icon">
+          <i [class]="'bi ' + getIcon(error.type)"></i>
+        </div>
+        <h3 class="error-alert__title">{{ error.message }}</h3>
+        <button class="error-alert__close" (click)="closeAlert()" aria-label="Cerrar">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      
+      <!-- Details -->
+      @if (error.details && error.details.length > 0) {
+        <div class="error-alert__details">
+          <ul>
+            @for (detail of error.details; track $index) {
+              <li>{{ detail }}</li>
+            }
+          </ul>
+        </div>
+      }
+      
+      <!-- Actions -->
+      <div class="error-alert__actions">
+        <button class="btn-dismiss" (click)="closeAlert()">
+          Entendido
+        </button>
+      </div>
+      
+    </div>
+  </div>
+}
