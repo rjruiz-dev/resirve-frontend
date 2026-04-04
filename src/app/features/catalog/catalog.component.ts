@@ -133,4 +133,8 @@ export class CatalogComponent implements OnInit {
     const currentFilters = this.filters();
     this.filters.set({ ...currentFilters, [key]: value, page: 1 });
   }
+
+  updatePriceFilter(key: 'price_min' | 'price_max', value: string): void {
+    this.updateFilter(key, value ? Number(value) : undefined);
+  }
 }

@@ -80,7 +80,7 @@
               class="form-control"
               placeholder="Mín"
               [value]="filters().price_min || ''"
-              (input)="updateFilter('price_min', $any($event.target).value ? Number($any($event.target).value) : undefined)"
+              (input)="updatePriceFilter('price_min', $any($event.target).value)"
             >
             <span>-</span>
             <input 
@@ -88,7 +88,7 @@
               class="form-control"
               placeholder="Máx"
               [value]="filters().price_max || ''"
-              (input)="updateFilter('price_max', $any($event.target).value ? Number($any($event.target).value) : undefined)"
+              (input)="updatePriceFilter('price_max', $any($event.target).value)"
             >
           </div>
           <button class="btn-apply" (click)="applyFilters()">Aplicar</button>
