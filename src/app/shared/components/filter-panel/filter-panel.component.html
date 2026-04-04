@@ -1,0 +1,147 @@
+<div class="filter-panel">
+  <div class="filter-panel__header">
+    <h3 class="filter-panel__title">
+      <i class="bi bi-funnel"></i>
+      Filtros
+    </h3>
+    <button 
+      type="button" 
+      class="filter-panel__reset"
+      (click)="resetFilters()">
+      <i class="bi bi-arrow-clockwise"></i>
+      Limpiar
+    </button>
+  </div>
+  
+  <form class="filter-panel__form" (ngSubmit)="applyFilters()">
+    
+    <!-- Búsqueda -->
+    <div class="filter-group">
+      <label class="filter-label">
+        <i class="bi bi-search"></i>
+        Buscar
+      </label>
+      <input 
+        type="text"
+        class="filter-input"
+        [(ngModel)]="filters.search"
+        name="search"
+        placeholder="Ej: bicicleta, heladera..."
+        (input)="applyFilters()"
+      >
+    </div>
+    
+    <!-- Categoría -->
+    <div class="filter-group">
+      <label class="filter-label">
+        <i class="bi bi-tag"></i>
+        Categoría
+      </label>
+      <select 
+        class="filter-select"
+        [(ngModel)]="filters.category"
+        name="category"
+        (change)="applyFilters()">
+        <option [value]="undefined">Todas las categorías</option>
+        @for (category of categories(); track category.id) {
+          <option [value]="category.slug">
+            {{ category.name }} ({{ category.available_products_count || 0 }})
+          </option>
+        }
+      </select>
+    </div>
+    
+    <!-- Condición -->
+    <div class="filter-group">
+      <label class="filter-label">
+        <i class="bi bi-star"></i>
+        Condición
+      </label>
+      <select 
+        class="filter-select"
+        [(ngModel)]="filters.condition"
+        name="condition"
+        (change)="applyFilters()">
+        <option [value]="undefined">Todas las condiciones</option>
+        <option value="como_nuevo">Como Nuevo</option>
+        <option value="buen_estado">Buen Estado</option>
+        <option value="funcional">Funcional</option>
+      </select>
+    </div>
+    
+    <!-- Precio Mínimo -->
+    <div class="filter-group">
+      <label class="filter-label">
+        <i class="bi bi-currency-dollar"></i>
+        Precio Mínimo
+      </label>
+      <input 
+        type="number"
+        class="filter-input"
+        [(ngModel)]="filters.price_min"
+        name="price_min"
+        placeholder="$0"
+        min="0"
+        (change)="applyFilters()"
+      >
+    </div>
+    
+    <!-- Precio Máximo -->
+    <div class="filter-group">
+      <label class="filter-label">
+        <i class="bi bi-currency-dollar"></i>
+        Precio Máximo
+      </label>
+      <input 
+        type="number"
+        class="filter-input"
+        [(ngModel)]="filters.price_max"
+        name="price_max"
+        placeholder="$1.000.000"
+        min="0"
+        (change)="applyFilters()"
+      >
+    </div>
+    
+    <!-- Ordenar por -->
+    <div class="filter-group">
+      <label class="filter-label">
+        <i class="bi bi-sort-down"></i>
+        Ordenar por
+      </label>
+      <select 
+        class="filter-select"
+        [(ngModel)]="filters.sort"
+        name="sort"
+        (change)="applyFilters()">
+        <option value="created_at">Más Recientes</option>
+        <option value="price">Precio</option>
+        <option value="views_count">Más Vistos</option>
+        <option value="title">Nombre</option>
+      </select>
+    </div>
+    
+    <!-- Orden -->
+    <div class="filter-group">
+      <label class="filter-label">
+        <i class="bi bi-arrow-down-up"></i>
+        Orden
+      </label>
+      <select 
+        class="filter-select"
+        [(ngModel)]="filters.order"
+        name="order"
+        (change)="applyFilters()">
+        <option value="desc">Descendente</option>
+        <option value="asc">Ascendente</option>
+      </select>
+    </div>
+    
+    <!-- Submit (mobile) -->
+    <button type="submit" class="filter-panel__submit">
+      <i class="bi bi-check-circle"></i>
+      Aplicar Filtros
+    </button>
+    
+  </form>
+</div>

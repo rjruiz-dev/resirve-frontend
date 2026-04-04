@@ -1,0 +1,100 @@
+@import 'variables';
+@import 'mixins';
+
+.filter-panel {
+  background: $bg-secondary;
+  border-radius: $border-radius-lg;
+  padding: $spacing-xl;
+  box-shadow: $shadow-sm;
+  position: sticky;
+  top: calc($navbar-height + $spacing-md);
+}
+
+.filter-panel__header {
+  @include flex-between;
+  margin-bottom: $spacing-xl;
+  padding-bottom: $spacing-md;
+  border-bottom: 2px solid $border-color;
+}
+
+.filter-panel__title {
+  @include heading-display;
+  font-size: $h4-size;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  
+  i {
+    color: $color-terracota;
+  }
+}
+
+.filter-panel__reset {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $text-secondary;
+  
+  background: transparent;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: $transition-all;
+  
+  &:hover {
+    background: rgba($color-terracota, 0.05);
+    border-color: $color-terracota;
+    color: $color-terracota;
+  }
+}
+
+.filter-panel__form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.filter-label {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  i {
+    font-size: 0.9rem;
+    color: $color-terracota;
+  }
+}
+
+.filter-input,
+.filter-select {
+  @include input-base;
+  font-size: $font-size-sm;
+}
+
+.filter-panel__submit {
+  @include button-variant($color-terracota, $text-light);
+  display: flex;
+  gap: $spacing-sm;
+  margin-top: $spacing-md;
+  
+  @include respond-to('lg') {
+    display: none; // En desktop, los filtros se aplican automáticamente
+  }
+}
