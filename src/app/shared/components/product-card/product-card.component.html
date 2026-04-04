@@ -1,0 +1,53 @@
+<article class="product-card">
+  <a [routerLink]="['/productos', product().slug]" class="product-card__link">
+    
+    <!-- Image -->
+    <div class="product-card__image">
+      <img 
+        [src]="product().primary_image?.full_url || '/assets/images/product-placeholder.jpg'" 
+        [alt]="product().title"
+        appImageFallback="/assets/images/product-placeholder.jpg"
+      >
+      
+      <!-- Status Badge -->
+      <div class="product-card__badge">
+        <app-badge [status]="product().status" />
+      </div>
+      
+      <!-- Featured Flag -->
+      @if (product().is_featured) {
+        <div class="product-card__featured">
+          <i class="bi bi-star-fill"></i>
+        </div>
+      }
+    </div>
+    
+    <!-- Content -->
+    <div class="product-card__content">
+      
+      <!-- Category -->
+      @if (product().category) {
+        <p class="product-card__category">
+          <i class="bi" [class]="product().category.icon || 'bi-tag'"></i>
+          {{ product().category.name }}
+        </p>
+      }
+      
+      <!-- Title -->
+      <h3 class="product-card__title">{{ product().title }}</h3>
+      
+      <!-- Description (truncated) -->
+      <p class="product-card__description">
+        {{ product().description }}
+      </p>
+      
+      <!-- Footer -->
+      <div class="product-card__footer">
+        <span class="product-card__price">{{ product().formatted_price }}</span>
+        <span class="product-card__condition">{{ product().condition_text }}</span>
+      </div>
+      
+    </div>
+    
+  </a>
+</article>
