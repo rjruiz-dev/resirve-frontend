@@ -1,0 +1,332 @@
+@import 'variables';
+@import 'mixins';
+
+.hero {
+  background: linear-gradient(135deg,
+    rgba($color-terracota, 0.05) 0%,
+    rgba($color-crema, 1) 50%,
+    rgba($color-verde-musgo, 0.05) 100%
+  );
+  padding: $spacing-3xl 0;
+  position: relative;
+  overflow: hidden;
+  
+  @include respond-to('md') {
+    padding: 5rem 0;
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    @include paper-texture;
+    opacity: 0.5;
+  }
+}
+
+.hero__container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+  
+  @include respond-to('md') {
+    padding: 0 $spacing-xl;
+  }
+}
+
+.hero__content {
+  max-width: 700px;
+  margin-bottom: $spacing-2xl;
+  @include slide-up;
+}
+
+.hero__title {
+  @include heading-display;
+  font-size: 2.5rem;
+  margin-bottom: $spacing-lg;
+  line-height: 1.1;
+  
+  @include respond-to('md') {
+    font-size: 3.5rem;
+  }
+  
+  @include respond-to('lg') {
+    font-size: 4rem;
+  }
+}
+
+.hero__title--accent {
+  color: $color-terracota;
+  position: relative;
+  display: inline-block;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, $color-terracota 0%, $color-mostaza 100%);
+    border-radius: 2px;
+  }
+}
+
+.hero__description {
+  font-size: $font-size-lg;
+  color: $text-secondary;
+  line-height: 1.7;
+  margin-bottom: $spacing-xl;
+  max-width: 600px;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+}
+
+.hero__stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-md;
+  
+  @include respond-to('sm') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .stat {
+    @include flex-column;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-lg;
+    background: $bg-secondary;
+    border-radius: $border-radius-md;
+    box-shadow: $shadow-sm;
+    text-align: center;
+    @include scale-in;
+    
+    i {
+      font-size: 2rem;
+      color: $color-terracota;
+    }
+    
+    &__number {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+      color: $text-primary;
+    }
+  }
+}
+
+.section {
+  @include section-spacing;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  @include container-padding;
+}
+
+.section__header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto $spacing-3xl;
+}
+
+.section__title {
+  @include heading-display;
+  font-size: $h2-size;
+  margin-bottom: $spacing-md;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+  
+  i {
+    color: $color-terracota;
+  }
+}
+
+.section__description {
+  font-size: $font-size-lg;
+  color: $text-secondary;
+  line-height: 1.6;
+}
+
+.section__footer {
+  text-align: center;
+  margin-top: $spacing-3xl;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-xl;
+  
+  @include respond-to('sm') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include respond-to('lg') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  @include respond-to('xl') {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.categories-section {
+  background: $bg-tertiary;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-md;
+  
+  @include respond-to('sm') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  @include respond-to('md') {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  @include respond-to('lg') {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.category-card {
+  @include flex-column;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-xl $spacing-lg;
+  background: $bg-secondary;
+  border-radius: $border-radius-lg;
+  text-decoration: none;
+  box-shadow: $shadow-sm;
+  transition: $transition-all;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-hover;
+    
+    .category-card__icon {
+      background: $color-terracota;
+      
+      i {
+        color: $text-light;
+      }
+    }
+  }
+}
+
+.category-card__icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba($color-terracota, 0.1);
+  @include flex-center;
+  transition: $transition-all;
+  
+  i {
+    font-size: 1.75rem;
+    color: $color-terracota;
+    transition: color $transition-base;
+  }
+}
+
+.category-card__name {
+  font-family: $font-body;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  margin: 0;
+  text-align: center;
+}
+
+.category-card__count {
+  font-size: $font-size-sm;
+  color: $text-muted;
+  margin: 0;
+}
+
+.cta-section {
+  background: linear-gradient(135deg, $color-terracota 0%, darken($color-terracota, 10%) 100%);
+  color: $text-light;
+}
+
+.cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-2xl;
+  text-align: center;
+  padding: $spacing-2xl;
+  
+  @include respond-to('md') {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+.cta__content {
+  flex: 1;
+}
+
+.cta__title {
+  font-family: $font-display;
+  font-size: $h2-size;
+  font-weight: $font-weight-bold;
+  color: $text-light;
+  margin: 0 0 $spacing-md;
+}
+
+.cta__description {
+  font-size: $font-size-lg;
+  color: rgba($text-light, 0.9);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.btn {
+  @include button-base;
+  
+  &--primary {
+    @include button-variant($color-terracota, $text-light);
+  }
+  
+  &--secondary {
+    @include button-variant($color-verde-musgo, $text-light);
+  }
+  
+  &--outline {
+    @include button-base;
+    background: transparent;
+    border: 2px solid $color-terracota;
+    color: $color-terracota;
+    
+    &:hover:not(:disabled) {
+      background: $color-terracota;
+      color: $text-light;
+    }
+  }
+  
+  &--large {
+    padding: $spacing-lg $spacing-2xl;
+    font-size: $font-size-lg;
+  }
+  
+  i {
+    font-size: 1.1em;
+  }
+}
