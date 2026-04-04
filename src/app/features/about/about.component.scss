@@ -1,0 +1,263 @@
+@import 'variables';
+@import 'mixins';
+
+.hero {
+  background: linear-gradient(135deg,
+    rgba($color-terracota, 0.1) 0%,
+    rgba($color-crema, 1) 100%
+  );
+  padding: $spacing-3xl 0;
+  text-align: center;
+}
+
+.hero__container {
+  max-width: 800px;
+  margin: 0 auto;
+  @include container-padding;
+}
+
+.hero__title {
+  @include heading-display;
+  font-size: 3rem;
+  margin-bottom: $spacing-lg;
+  
+  .accent {
+    color: $color-terracota;
+  }
+}
+
+.hero__subtitle {
+  font-size: $font-size-xl;
+  color: $text-secondary;
+  line-height: 1.6;
+}
+
+.section {
+  @include section-spacing;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  @include container-padding;
+}
+
+.section__title {
+  @include heading-display;
+  font-size: $h2-size;
+  text-align: center;
+  margin-bottom: $spacing-3xl;
+}
+
+.mission__content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-3xl;
+  align-items: center;
+  
+  @include respond-to('lg') {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.mission__text {
+  h2 {
+    @include heading-display;
+    font-size: $h2-size;
+    margin-bottom: $spacing-xl;
+  }
+  
+  p {
+    font-size: $font-size-lg;
+    line-height: 1.8;
+    color: $text-secondary;
+    margin-bottom: $spacing-lg;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.mission__image {
+  .image-placeholder {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg,
+      rgba($color-terracota, 0.1) 0%,
+      rgba($color-verde-musgo, 0.1) 100%
+    );
+    border-radius: $border-radius-lg;
+    @include flex-center;
+    
+    i {
+      font-size: 8rem;
+      color: rgba($color-terracota, 0.3);
+    }
+  }
+}
+
+.features {
+  background: $bg-tertiary;
+}
+
+.features__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-xl;
+  
+  @include respond-to('sm') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include respond-to('lg') {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.feature-card {
+  background: $bg-secondary;
+  padding: $spacing-xl;
+  border-radius: $border-radius-lg;
+  text-align: center;
+  box-shadow: $shadow-sm;
+  transition: $transition-all;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-hover;
+  }
+}
+
+.feature-card__icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto $spacing-lg;
+  border-radius: 50%;
+  background: linear-gradient(135deg,
+    rgba($color-terracota, 0.1) 0%,
+    rgba($color-mostaza, 0.1) 100%
+  );
+  @include flex-center;
+  
+  i {
+    font-size: 2.5rem;
+    color: $color-terracota;
+  }
+}
+
+.feature-card__title {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  margin-bottom: $spacing-sm;
+}
+
+.feature-card__description {
+  color: $text-secondary;
+  line-height: 1.6;
+}
+
+.stats {
+  background: linear-gradient(135deg,
+    $color-terracota 0%,
+    darken($color-terracota, 10%) 100%
+  );
+  color: $text-light;
+}
+
+.stats__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-xl;
+  
+  @include respond-to('sm') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.stat-card {
+  text-align: center;
+  padding: $spacing-xl;
+}
+
+.stat-card__number {
+  font-family: $font-display;
+  font-size: 3.5rem;
+  font-weight: $font-weight-bold;
+  margin-bottom: $spacing-sm;
+}
+
+.stat-card__label {
+  font-size: $font-size-lg;
+  opacity: 0.9;
+}
+
+.values__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-2xl;
+  
+  @include respond-to('md') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.value-card {
+  text-align: center;
+  
+  i {
+    font-size: 3rem;
+    color: $color-terracota;
+    margin-bottom: $spacing-lg;
+  }
+  
+  h3 {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-md;
+  }
+  
+  p {
+    color: $text-secondary;
+    line-height: 1.7;
+  }
+}
+
+.cta {
+  text-align: center;
+}
+
+.cta__content {
+  max-width: 700px;
+  margin: 0 auto;
+  
+  h2 {
+    @include heading-display;
+    font-size: $h2-size;
+    margin-bottom: $spacing-md;
+  }
+  
+  p {
+    font-size: $font-size-lg;
+    color: $text-secondary;
+    margin-bottom: $spacing-xl;
+  }
+}
+
+.cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+  justify-content: center;
+}
+
+.btn {
+  @include button-base;
+  
+  &--primary {
+    @include button-variant($color-terracota, $text-light);
+  }
+  
+  &--secondary {
+    @include button-variant($color-verde-musgo, $text-light);
+  }
+}

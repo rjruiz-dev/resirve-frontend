@@ -1,0 +1,133 @@
+<div class="about-page">
+  
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero__container">
+      <h1 class="hero__title">
+        Acerca de <span class="accent">ReSirve</span>
+      </h1>
+      <p class="hero__subtitle">
+        Una plataforma honesta para comprar y vender productos usados con historia
+      </p>
+    </div>
+  </section>
+  
+  <!-- Mission Section -->
+  <section class="section mission">
+    <div class="container">
+      <div class="mission__content">
+        <div class="mission__text">
+          <h2>Nuestra Misión</h2>
+          <p>
+            En ReSirve creemos que cada producto merece una segunda oportunidad.
+            Conectamos personas que buscan artículos de calidad con quienes
+            quieren darles una nueva vida a sus pertenencias.
+          </p>
+          <p>
+            No somos solo un marketplace más. Somos una comunidad que valora
+            la honestidad, la sustentabilidad y la historia detrás de cada objeto.
+          </p>
+          <p>
+            Facilitamos transacciones directas entre vendedores y compradores,
+            eliminando intermediarios innecesarios y promoviendo el consumo responsable.
+          </p>
+        </div>
+        <div class="mission__image">
+          <div class="image-placeholder">
+            <i class="bi bi-box-seam"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Features Section -->
+  <section class="section features">
+    <div class="container">
+      <h2 class="section__title">¿Por qué elegir ReSirve?</h2>
+      
+      <div class="features__grid">
+        @for (feature of features; track feature.title) {
+          <div class="feature-card">
+            <div class="feature-card__icon">
+              <i class="bi" [class]="feature.icon"></i>
+            </div>
+            <h3 class="feature-card__title">{{ feature.title }}</h3>
+            <p class="feature-card__description">{{ feature.description }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+  
+  <!-- Stats Section -->
+  <section class="section stats">
+    <div class="container">
+      <div class="stats__grid">
+        @for (stat of stats; track stat.label) {
+          <div class="stat-card">
+            <div class="stat-card__number">{{ stat.number }}</div>
+            <div class="stat-card__label">{{ stat.label }}</div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+  
+  <!-- Values Section -->
+  <section class="section values">
+    <div class="container">
+      <h2 class="section__title">Nuestros Valores</h2>
+      
+      <div class="values__grid">
+        <div class="value-card">
+          <i class="bi bi-lightbulb"></i>
+          <h3>Transparencia</h3>
+          <p>
+            Información clara y honesta sobre cada producto.
+            Sin sorpresas, sin letra chica.
+          </p>
+        </div>
+        
+        <div class="value-card">
+          <i class="bi bi-people"></i>
+          <h3>Comunidad</h3>
+          <p>
+            Fomentamos relaciones de confianza entre compradores
+            y vendedores en un ambiente seguro.
+          </p>
+        </div>
+        
+        <div class="value-card">
+          <i class="bi bi-globe"></i>
+          <h3>Sustentabilidad</h3>
+          <p>
+            Promovemos el consumo responsable y la economía circular
+            dándole valor a lo usado.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA Section -->
+  <section class="section cta">
+    <div class="container">
+      <div class="cta__content">
+        <h2>¿Listo para empezar?</h2>
+        <p>Explora nuestro catálogo o contacta con nosotros para vender tus productos</p>
+        <div class="cta__actions">
+          <a routerLink="/catalogo" class="btn btn--primary">
+            <i class="bi bi-grid-3x3-gap"></i>
+            Ver Catálogo
+          </a>
+          <a routerLink="/contacto" class="btn btn--secondary">
+            <i class="bi bi-envelope"></i>
+            Contactar
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+</div>

@@ -1,0 +1,37 @@
+<div class="not-found-page">
+  <div class="not-found__container">
+    
+    <div class="not-found__content">
+      
+      <!-- Error Code -->
+      <div class="error-code">404</div>
+      
+      <!-- Message -->
+      <h1 class="error-title">Página no encontrada</h1>
+      <p class="error-message">
+        Lo sentimos, la página que buscas no existe o fue movida.
+      </p>
+      
+      <!-- Illustration -->
+      <div class="illustration">
+        <i class="bi bi-box-seam"></i>
+        <i class="bi bi-question-circle"></i>
+      </div>
+      
+      <!-- Suggestions -->
+      <div class="suggestions">
+        <h3>¿Qué puedes hacer?</h3>
+        <div class="suggestions__grid">
+          @for (suggestion of suggestions; track suggestion.label) {
+            <a [routerLink]="suggestion.link" class="suggestion-card">
+              <i class="bi {{ suggestion.icon }}"></i>
+              <span>{{ suggestion.label }}</span>
+            </a>
+          }
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+</div>

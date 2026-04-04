@@ -1,0 +1,238 @@
+@import 'variables';
+@import 'mixins';
+
+.hero {
+  background: linear-gradient(135deg,
+    rgba($color-verde-musgo, 0.1) 0%,
+    rgba($color-crema, 1) 100%
+  );
+  padding: $spacing-3xl 0;
+  text-align: center;
+}
+
+.hero__container {
+  max-width: 800px;
+  margin: 0 auto;
+  @include container-padding;
+}
+
+.hero__title {
+  @include heading-display;
+  font-size: 3rem;
+  margin-bottom: $spacing-lg;
+}
+
+.hero__subtitle {
+  font-size: $font-size-xl;
+  color: $text-secondary;
+}
+
+.section {
+  @include section-spacing;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  @include container-padding;
+}
+
+.methods-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-xl;
+  
+  @include respond-to('md') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.method-card {
+  background: $bg-secondary;
+  padding: $spacing-2xl;
+  border-radius: $border-radius-lg;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: $shadow-sm;
+  transition: $transition-all;
+  
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: $shadow-hover;
+  }
+}
+
+.method-card__icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto $spacing-lg;
+  border-radius: 50%;
+  @include flex-center;
+  
+  i {
+    font-size: 2.5rem;
+    color: $text-light;
+  }
+  
+  &--success {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  }
+  
+  &--primary {
+    background: linear-gradient(135deg, $color-terracota 0%, $color-mostaza 100%);
+  }
+  
+  &--danger {
+    background: linear-gradient(135deg, #E1306C 0%, #F77737 100%);
+  }
+}
+
+.method-card__title {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+  margin-bottom: $spacing-xs;
+}
+
+.method-card__description {
+  color: $text-secondary;
+}
+
+.contact-form-section {
+  background: $bg-tertiary;
+}
+
+.form-container {
+  max-width: 700px;
+  margin: 0 auto;
+  background: $bg-secondary;
+  padding: $spacing-3xl;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-md;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: $spacing-2xl;
+  
+  h2 {
+    @include heading-display;
+    font-size: $h2-size;
+    margin-bottom: $spacing-sm;
+  }
+  
+  p {
+    color: $text-secondary;
+  }
+}
+
+.contact-form {
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+    
+    @include respond-to('md') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .form-group {
+    margin-bottom: $spacing-lg;
+    
+    label {
+      display: block;
+      font-weight: $font-weight-semibold;
+      margin-bottom: $spacing-xs;
+    }
+    
+    .form-control {
+      @include input-base;
+    }
+    
+    select.form-control {
+      cursor: pointer;
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+  }
+  
+  .form-error {
+    display: block;
+    color: $color-danger;
+    font-size: $font-size-sm;
+    margin-top: $spacing-xs;
+  }
+}
+
+.alert {
+  padding: $spacing-xl;
+  border-radius: $border-radius-md;
+  display: flex;
+  gap: $spacing-md;
+  margin-bottom: $spacing-xl;
+  
+  i {
+    font-size: 2rem;
+  }
+  
+  h4 {
+    margin: 0 0 $spacing-xs;
+  }
+  
+  p {
+    margin: 0;
+  }
+  
+  &--success {
+    background: rgba($color-success, 0.1);
+    color: darken($color-success, 20%);
+  }
+}
+
+.btn {
+  @include button-base;
+  
+  &--primary {
+    @include button-variant($color-terracota, $text-light);
+  }
+  
+  &--block {
+    width: 100%;
+  }
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-xl;
+  
+  @include respond-to('md') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.info-card {
+  text-align: center;
+  padding: $spacing-xl;
+  
+  i {
+    font-size: 3rem;
+    color: $color-terracota;
+    margin-bottom: $spacing-lg;
+  }
+  
+  h3 {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-md;
+  }
+  
+  p {
+    color: $text-secondary;
+    line-height: 1.7;
+  }
+}
