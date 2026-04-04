@@ -7,13 +7,22 @@
 
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from '@shared/components/navbar/navbar.component';
+import {
+  ErrorAlertComponent,
+  FooterComponent,
+  LoadingSpinnerComponent,
+  NavbarComponent,
+} from '@shared/components';
 
 @Component({
   selector: 'app-main-layout',
   standalone: true,
   imports: [
-    RouterOutlet   
+    RouterOutlet,
+    NavbarComponent,
+    FooterComponent,
+    LoadingSpinnerComponent,
+    ErrorAlertComponent,
   ],
   template: `
     <!-- Loading Spinner Global -->
