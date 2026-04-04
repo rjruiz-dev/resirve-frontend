@@ -1,0 +1,147 @@
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero__container">
+    <div class="hero__content">
+      <h1 class="hero__title">
+        Productos usados <br>
+        <span class="hero__title--accent">con historia</span>
+      </h1>
+      <p class="hero__description">
+        Cada artículo tiene su historia. Compra y vende de forma directa,
+        honesta y sin intermediarios.
+      </p>
+      <div class="hero__actions">
+        <a routerLink="/catalogo" class="btn btn--primary">
+          <i class="bi bi-grid-3x3-gap"></i>
+          Ver Catálogo
+        </a>
+        <a routerLink="/acerca-de" class="btn btn--secondary">
+          <i class="bi bi-info-circle"></i>
+          Conocer más
+        </a>
+      </div>
+    </div>
+    
+    <div class="hero__stats">
+      <div class="stat">
+        <i class="bi bi-check-circle-fill"></i>
+        <span class="stat__number">Productos verificados</span>
+      </div>
+      <div class="stat">
+        <i class="bi bi-hand-thumbs-up-fill"></i>
+        <span class="stat__number">Compra directa</span>
+      </div>
+      <div class="stat">
+        <i class="bi bi-shield-check"></i>
+        <span class="stat__number">Transacciones seguras</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products -->
+@if (featuredProducts().length > 0) {
+  <section class="section featured-section">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">
+          <i class="bi bi-star-fill"></i>
+          Productos Destacados
+        </h2>
+        <p class="section__description">
+          Nuestra selección especial de productos en excelente estado
+        </p>
+      </div>
+      
+      <div class="products-grid">
+        @for (product of featuredProducts(); track product.id) {
+          <app-product-card [product]="product" />
+        }
+      </div>
+      
+      <div class="section__footer">
+        <a routerLink="/catalogo" class="btn btn--outline">
+          Ver todos los productos
+          <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+}
+
+<!-- Categories -->
+@if (categories().length > 0) {
+  <section class="section categories-section">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">
+          <i class="bi bi-tag-fill"></i>
+          Explora por Categoría
+        </h2>
+        <p class="section__description">
+          Encuentra lo que buscas navegando por categorías
+        </p>
+      </div>
+      
+      <div class="categories-grid">
+        @for (category of categories(); track category.id) {
+          <a [routerLink]="['/categoria', category.slug]" class="category-card">
+            <div class="category-card__icon">
+              <i class="bi" [class]="category.icon || 'bi-box'"></i>
+            </div>
+            <h3 class="category-card__name">{{ category.name }}</h3>
+            @if (category.available_products_count !== undefined) {
+              <p class="category-card__count">
+                {{ category.available_products_count }} productos
+              </p>
+            }
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+}
+
+<!-- Recent Products -->
+@if (recentProducts().length > 0) {
+  <section class="section recent-section">
+    <div class="container">
+      <div class="section__header">
+        <h2 class="section__title">
+          <i class="bi bi-clock-history"></i>
+          Agregados Recientemente
+        </h2>
+        <p class="section__description">
+          Los últimos productos que se sumaron al catálogo
+        </p>
+      </div>
+      
+      <div class="products-grid">
+        @for (product of recentProducts(); track product.id) {
+          <app-product-card [product]="product" />
+        }
+      </div>
+    </div>
+  </section>
+}
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta">
+      <div class="cta__content">
+        <h2 class="cta__title">¿Tienes algo para vender?</h2>
+        <p class="cta__description">
+          Únete a nuestra comunidad de vendedores y dale una segunda vida
+          a tus productos.
+        </p>
+      </div>
+      <div class="cta__actions">
+        <a routerLink="/contacto" class="btn btn--primary btn--large">
+          <i class="bi bi-envelope-fill"></i>
+          Contáctanos
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
