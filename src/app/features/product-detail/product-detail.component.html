@@ -1,0 +1,178 @@
+@if (product(); as prod) {
+  <div class="product-detail">
+    <div class="product-detail__container">
+      
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a routerLink="/">Inicio</a>
+        <span>/</span>
+        <a routerLink="/catalogo">Catálogo</a>
+        <span>/</span>
+        @if (prod.category) {
+          <a [routerLink]="['/categoria', prod.category.slug]">{{ prod.category.name }}</a>
+          <span>/</span>
+        }
+        <span class="breadcrumb__current">{{ prod.title }}</span>
+      </nav>
+      
+      <div class="product-detail__content">
+        
+        <!-- Gallery -->
+        <div class="gallery">
+          <div class="gallery__main">
+            <img 
+              [src]="prod.images && prod.images[selectedImageIndex()] 
+                    ? prod.images[selectedImageIndex()].full_url 
+                    : (prod.primary_image?.full_url || '/assets/images/product-placeholder.jpg')"
+              [alt]="prod.title"
+              appImageFallback="/assets/images/product-placeholder.jpg"
+            >
+          </div>
+          
+          @if (prod.images && prod.images.length > 1) {
+            <div class="gallery__thumbs">
+              @for (image of prod.images; track image.id; let i = $index) {
+                <button 
+                  class="gallery__thumb"
+                  [class.active]="selectedImageIndex() === i"
+                  (click)="selectImage(i)">
+                  <img [src]="image.full_url" [alt]="prod.title">
+                </button>
+              }
+            </div>
+          }
+        </div>
+        
+        <!-- Info -->
+        <div class="product-info">
+          <div class="product-info__header">
+            <app-badge [status]="prod.status" />
+            @if (prod.is_featured) {
+              <span class="featured-badge">
+                <i class="bi bi-star-fill"></i> Destacado
+              </span>
+            }
+          </div>
+          
+          <h1 class="product-info__title">{{ prod.title }}</h1>
+          
+          @if (prod.category) {
+            <a [routerLink]="['/categoria', prod.category.slug]" class="product-info__category">
+              <i class="bi" [class]="prod.category.icon || 'bi-tag'"></i>
+              {{ prod.category.name }}
+            </a>
+          }
+          
+          <div class="product-info__price">{{ prod.formatted_price }}</div>
+          
+          <div class="product-info__meta">
+            <div class="meta-item">
+              <i class="bi bi-box-seam"></i>
+              <span>{{ prod.condition_text }}</span>
+            </div>
+            <div class="meta-item">
+              <i class="bi bi-eye"></i>
+              <span>{{ prod.views_count }} vistas</span>
+            </div>
+            <div class="meta-item">
+              <i class="bi bi-calendar"></i>
+              <span>{{ prod.created_at_human }}</span>
+            </div>
+          </div>
+          
+          <div class="product-info__description">
+            <h3>Descripción</h3>
+            <p>{{ prod.description }}</p>
+          </div>
+          
+          @if (prod.story) {
+            <div class="product-info__story">
+              <h3><i class="bi bi-book"></i> Historia del producto</h3>
+              <p>{{ prod.story }}</p>
+            </div>
+          }
+          
+          <!-- Contact Form -->
+          @if (prod.status === 'disponible') {
+            <div class="contact-section">
+              <h3>¿Te interesa este producto?</h3>
+              
+              @if (formSuccess()) {
+                <div class="alert alert--success">
+                  <i class="bi bi-check-circle-fill"></i>
+                  <div>
+                    <h4>¡Solicitud enviada!</h4>
+                    <p>Nos pondremos en contacto contigo pronto.</p>
+                    <a [href]="whatsappLink()" target="_blank" class="btn btn--success">
+                      <i class="bi bi-whatsapp"></i> Continuar por WhatsApp
+                    </a>
+                  </div>
+                </div>
+              } @else {
+                <form [formGroup]="contactForm" (ngSubmit)="submitContactForm()" class="contact-form">
+                  <div class="form-group">
+                    <label>Nombre *</label>
+                    <input type="text" class="form-control" formControlName="name" placeholder="Tu nombre">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" class="form-control" formControlName="email" placeholder="tu@email.com">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label>Teléfono</label>
+                    <input type="tel" class="form-control" formControlName="phone" placeholder="+54 9 11 1234-5678">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label>Mensaje</label>
+                    <textarea class="form-control" formControlName="message" rows="3" 
+                              placeholder="¿Alguna pregunta sobre el producto?"></textarea>
+                  </div>
+                  
+                  <button type="submit" class="btn btn--primary" [disabled]="contactForm.invalid || formSubmitted()">
+                    @if (formSubmitted()) {
+                      <i class="bi bi-hourglass-split"></i> Enviando...
+                    } @else {
+                      <i class="bi bi-envelope"></i> Enviar consulta
+                    }
+                  </button>
+                </form>
+              }
+            </div>
+          } @else {
+            <div class="alert alert--info">
+              <i class="bi bi-info-circle"></i>
+              <span>Este producto ya no está disponible</span>
+            </div>
+          }
+        </div>
+        
+      </div>
+      
+      <!-- Related Products -->
+      @if (relatedProducts().length > 0) {
+        <div class="related-section">
+          <h2>Productos relacionados</h2>
+          <div class="products-grid">
+            @for (relProd of relatedProducts(); track relProd.id) {
+              <app-product-card [product]="relProd" />
+            }
+          </div>
+        </div>
+      }
+      
+    </div>
+  </div>
+} @else if (loading()) {
+  <div class="loading">
+    <p>Cargando producto...</p>
+  </div>
+} @else {
+  <div class="not-found">
+    <i class="bi bi-exclamation-triangle"></i>
+    <h2>Producto no encontrado</h2>
+    <a routerLink="/catalogo" class="btn btn--primary">Ver catálogo</a>
+  </div>
+}
