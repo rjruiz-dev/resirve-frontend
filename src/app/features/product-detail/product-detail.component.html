@@ -9,7 +9,7 @@
         <a routerLink="/catalogo">Catálogo</a>
         <span>/</span>
         @if (prod.category) {
-          <a [routerLink]="['/categoria', prod.category.slug]">{{ prod.category.name }}</a>
+          <a [routerLink]="['/categoria', prod.category?.slug]">{{ prod.category?.name }}</a>
           <span>/</span>
         }
         <span class="breadcrumb__current">{{ prod.title }}</span>
@@ -57,9 +57,9 @@
           <h1 class="product-info__title">{{ prod.title }}</h1>
           
           @if (prod.category) {
-            <a [routerLink]="['/categoria', prod.category.slug]" class="product-info__category">
-              <i class="bi" [class]="prod.category.icon || 'bi-tag'"></i>
-              {{ prod.category.name }}
+            <a [routerLink]="['/categoria', prod.category?.slug]" class="product-info__category">
+              <i class="bi" [class]="prod.category?.icon || 'bi-tag'"></i>
+              {{ prod.category?.name }}
             </a>
           }
           

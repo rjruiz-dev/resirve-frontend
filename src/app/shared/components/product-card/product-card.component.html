@@ -28,8 +28,8 @@
       <!-- Category -->
       @if (product().category) {
         <p class="product-card__category">
-          <i class="bi" [class]="product().category.icon || 'bi-tag'"></i>
-          {{ product().category.name }}
+          <i class="bi" [class]="product().category?.icon || 'bi-tag'"></i>
+          {{ product().category?.name }}
         </p>
       }
       
