@@ -6,6 +6,7 @@
 
 export * from './badge/badge.component';
 export * from './error-alert/error-alert.component';
+export * from './filter-panel/filter-panel.component';
 export * from './footer/footer.component';
 export * from './loading-spinner/loading-spinner.component';
 export * from './navbar/navbar.component';
