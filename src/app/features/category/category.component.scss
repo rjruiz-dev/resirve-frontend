@@ -1,0 +1,142 @@
+@import 'variables';
+@import 'mixins';
+
+.category-page__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  @include container-padding;
+}
+
+.category-page__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xl;
+  padding: $spacing-3xl 0;
+  margin-bottom: $spacing-2xl;
+  text-align: center;
+  background: linear-gradient(135deg,
+    rgba($color-terracota, 0.05) 0%,
+    rgba($color-crema, 1) 100%
+  );
+  border-radius: $border-radius-lg;
+  
+  @include respond-to('md') {
+    flex-direction: row;
+    text-align: left;
+    padding: $spacing-3xl;
+  }
+}
+
+.category-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, $color-terracota 0%, $color-mostaza 100%);
+  @include flex-center;
+  box-shadow: $shadow-lg;
+  
+  i {
+    font-size: 3rem;
+    color: $text-light;
+  }
+}
+
+.category-info {
+  flex: 1;
+}
+
+.category-title {
+  @include heading-display;
+  font-size: $h1-size;
+  color: $text-primary;
+  margin: 0 0 $spacing-sm;
+}
+
+.category-description {
+  font-size: $font-size-lg;
+  color: $text-secondary;
+  line-height: 1.7;
+  margin: 0 0 $spacing-md;
+}
+
+.category-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-lg;
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  
+  span, .link {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    
+    i {
+      color: $color-terracota;
+    }
+  }
+  
+  .link {
+    color: $color-terracota;
+    text-decoration: none;
+    font-weight: $font-weight-semibold;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-xl;
+  
+  @include respond-to('sm') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include respond-to('lg') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  @include respond-to('xl') {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.empty-state,
+.loading,
+.not-found {
+  @include flex-center;
+  @include flex-column;
+  gap: $spacing-lg;
+  padding: $spacing-3xl;
+  text-align: center;
+  min-height: 50vh;
+  
+  i {
+    font-size: 4rem;
+    color: $text-muted;
+  }
+  
+  h3, h2 {
+    font-size: $h3-size;
+    color: $text-primary;
+    margin: 0;
+  }
+  
+  p {
+    color: $text-secondary;
+    margin: 0;
+  }
+}
+
+.btn {
+  @include button-base;
+  
+  &--primary {
+    @include button-variant($color-terracota, $text-light);
+  }
+}

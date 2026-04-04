@@ -1,0 +1,60 @@
+@if (category(); as cat) {
+  <div class="category-page">
+    <div class="category-page__container">
+      
+      <!-- Header -->
+      <div class="category-page__header">
+        <div class="category-icon">
+          <i class="bi" [class]="cat.icon || 'bi-box'"></i>
+        </div>
+        <div class="category-info">
+          <h1 class="category-title">{{ cat.name }}</h1>
+          @if (cat.description) {
+            <p class="category-description">{{ cat.description }}</p>
+          }
+          <div class="category-meta">
+            @if (cat.available_products_count !== undefined) {
+              <span>
+                <i class="bi bi-box-seam"></i>
+                {{ cat.available_products_count }} productos disponibles
+              </span>
+            }
+            <a routerLink="/catalogo" class="link">
+              <i class="bi bi-grid-3x3-gap"></i>
+              Ver todas las categorías
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Products Grid -->
+      @if (cat.available_products && cat.available_products.length > 0) {
+        <div class="products-grid">
+          @for (product of cat.available_products; track product.id) {
+            <app-product-card [product]="product" />
+          }
+        </div>
+      } @else {
+        <div class="empty-state">
+          <i class="bi bi-inbox"></i>
+          <h3>No hay productos disponibles en esta categoría</h3>
+          <p>Explora otras categorías o vuelve más tarde</p>
+          <a routerLink="/catalogo" class="btn btn--primary">
+            Ver catálogo completo
+          </a>
+        </div>
+      }
+      
+    </div>
+  </div>
+} @else if (loading()) {
+  <div class="loading">
+    <p>Cargando categoría...</p>
+  </div>
+} @else {
+  <div class="not-found">
+    <i class="bi bi-exclamation-triangle"></i>
+    <h2>Categoría no encontrada</h2>
+    <a routerLink="/catalogo" class="btn btn--primary">Ver catálogo</a>
+  </div>
+}
