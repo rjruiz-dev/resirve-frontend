@@ -73,7 +73,7 @@ describe('NotFoundComponent', () => {
     });
 
     it('should include "Volver al inicio" suggestion', () => {
-      const cardTexts = Array.from(
+      const cardTexts = Array.from<HTMLElement>(
         fixture.nativeElement.querySelectorAll('.suggestion-card span')
       ).map((el) => el.textContent?.trim() ?? '');
 
@@ -81,7 +81,7 @@ describe('NotFoundComponent', () => {
     });
 
     it('should include "Ver catálogo" suggestion', () => {
-      const cardTexts = Array.from(
+      const cardTexts = Array.from<HTMLElement>(
         fixture.nativeElement.querySelectorAll('.suggestion-card span')
       ).map((el) => el.textContent?.trim() ?? '');
 
@@ -89,7 +89,7 @@ describe('NotFoundComponent', () => {
     });
 
     it('should include "Contactar" suggestion', () => {
-      const cardTexts = Array.from(
+      const cardTexts = Array.from<HTMLElement>(
         fixture.nativeElement.querySelectorAll('.suggestion-card span')
       ).map((el) => el.textContent?.trim() ?? '');
 

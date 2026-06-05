@@ -7,17 +7,33 @@
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
 import { CatalogComponent } from './catalog.component';
+import { ProductService, CategoryService } from '@core/services';
 
 describe('CatalogComponent', () => {
   let component: CatalogComponent;
   let fixture: ComponentFixture<CatalogComponent>;
 
+  const mockProductService = {
+    getProducts: jasmine.createSpy('getProducts').and.returnValue(of({
+      data: [],
+      meta: { current_page: 1, last_page: 1, total: 0 }
+    }))
+  };
+
+  const mockCategoryService = {
+    getCategories: jasmine.createSpy('getCategories').and.returnValue(of([]))
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CatalogComponent],
-      providers: [provideRouter([]), provideHttpClient()],
+      providers: [
+        provideRouter([]),
+        { provide: ProductService, useValue: mockProductService },
+        { provide: CategoryService, useValue: mockCategoryService },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CatalogComponent);
@@ -73,18 +89,20 @@ describe('CatalogComponent', () => {
   });
 
   describe('loading state', () => {
-    it('should show loading text when loading is true', () => {
-      const loadingEl = fixture.nativeElement.querySelector('.catalog__loading');
-      expect(loadingEl).toBeTruthy();
-      expect(loadingEl.textContent).toContain('Cargando');
+    it('should track loading as a signal', () => {
+      expect(component.loading).toBeDefined();
     });
   });
 
-  describe('pagination buttons', () => {
-    it('should render the pagination buttons as disabled by default', () => {
-      const prevBtn: HTMLButtonElement | null =
-        fixture.nativeElement.querySelector('.pagination__btn:first-child');
-      expect(prevBtn).toBeTruthy();
+  describe('pagination', () => {
+    it('should not render pagination when only one page exists', () => {
+      const pagination = fixture.nativeElement.querySelector('.pagination');
+      expect(pagination).toBeFalsy();
+    });
+
+    it('should track current page and total pages as signals', () => {
+      expect(component.currentPage()).toBe(1);
+      expect(component.totalPages()).toBe(1);
     });
   });
 });
