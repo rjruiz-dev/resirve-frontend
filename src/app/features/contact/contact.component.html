@@ -1,5 +1,5 @@
 <div class="contact-page">
-  
+
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero__container">
@@ -9,14 +9,14 @@
       </p>
     </div>
   </section>
-  
+
   <!-- Contact Methods -->
   <section class="section contact-methods">
     <div class="container">
       <div class="methods-grid">
         @for (method of contactMethods; track method.title) {
-          <a [href]="method.link" target="_blank" class="method-card">
-            <div class="method-card__icon" [class]="'method-card__icon--' + method.color">
+          <a [href]="method.link" target="_blank" rel="noopener" class="method-card">
+            <div class="method-card__icon method-card__icon--{{ method.color }}">
               <i class="bi" [class]="method.icon"></i>
             </div>
             <h3 class="method-card__title">{{ method.title }}</h3>
@@ -26,17 +26,17 @@
       </div>
     </div>
   </section>
-  
+
   <!-- Contact Form -->
   <section class="section contact-form-section">
     <div class="container">
       <div class="form-container">
-        
+
         <div class="form-header">
           <h2>Envíanos un mensaje</h2>
           <p>Completa el formulario y te responderemos a la brevedad</p>
         </div>
-        
+
         @if (formSuccess()) {
           <div class="alert alert--success">
             <i class="bi bi-check-circle-fill"></i>
@@ -46,39 +46,48 @@
             </div>
           </div>
         } @else {
-          <form [formGroup]="contactForm" (ngSubmit)="submitForm()" class="contact-form">
-            
+          <form [formGroup]="contactForm" (ngSubmit)="submitForm()" class="contact-form" novalidate>
+
             <div class="form-row">
               <div class="form-group">
-                <label>Nombre *</label>
-                <input 
-                  type="text" 
-                  class="form-control" 
+                <label for="name">Nombre *</label>
+                <input
+                  id="name"
+                  type="text"
+                  class="form-control"
                   formControlName="name"
                   placeholder="Tu nombre completo"
-                >
+                  [class.is-invalid]="contactForm.get('name')?.invalid && contactForm.get('name')?.touched"
+                />
                 @if (contactForm.get('name')?.invalid && contactForm.get('name')?.touched) {
                   <span class="form-error">El nombre es requerido</span>
                 }
               </div>
-              
+
               <div class="form-group">
-                <label>Email *</label>
-                <input 
-                  type="email" 
-                  class="form-control" 
+                <label for="email">Email *</label>
+                <input
+                  id="email"
+                  type="email"
+                  class="form-control"
                   formControlName="email"
                   placeholder="tu@email.com"
-                >
+                  [class.is-invalid]="contactForm.get('email')?.invalid && contactForm.get('email')?.touched"
+                />
                 @if (contactForm.get('email')?.invalid && contactForm.get('email')?.touched) {
                   <span class="form-error">Email inválido</span>
                 }
               </div>
             </div>
-            
+
             <div class="form-group">
-              <label>Asunto *</label>
-              <select class="form-control" formControlName="subject">
+              <label for="subject">Asunto *</label>
+              <select
+                id="subject"
+                class="form-control"
+                formControlName="subject"
+                [class.is-invalid]="contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched"
+              >
                 <option value="">Selecciona un asunto</option>
                 <option value="vender">Quiero vender un producto</option>
                 <option value="consulta">Consulta sobre un producto</option>
@@ -89,22 +98,24 @@
                 <span class="form-error">Selecciona un asunto</span>
               }
             </div>
-            
+
             <div class="form-group">
-              <label>Mensaje *</label>
-              <textarea 
-                class="form-control" 
+              <label for="message">Mensaje *</label>
+              <textarea
+                id="message"
+                class="form-control"
                 formControlName="message"
                 rows="5"
                 placeholder="Escribe tu mensaje aquí..."
+                [class.is-invalid]="contactForm.get('message')?.invalid && contactForm.get('message')?.touched"
               ></textarea>
               @if (contactForm.get('message')?.invalid && contactForm.get('message')?.touched) {
                 <span class="form-error">El mensaje debe tener al menos 10 caracteres</span>
               }
             </div>
-            
-            <button 
-              type="submit" 
+
+            <button
+              type="submit"
               class="btn btn--primary btn--block"
               [disabled]="contactForm.invalid || formSubmitted()"
             >
@@ -114,39 +125,39 @@
                 <i class="bi bi-send"></i> Enviar mensaje
               }
             </button>
-            
+
           </form>
         }
-        
+
       </div>
     </div>
   </section>
-  
-  <!-- Info Section -->
+
+  <!-- Info Cards -->
   <section class="section info-section">
     <div class="container">
       <div class="info-grid">
-        
+
         <div class="info-card">
-          <i class="bi bi-geo-alt"></i>
+          <i class="bi bi-geo-alt info-card__icon"></i>
           <h3>Ubicación</h3>
-          <p>Argentina<br>Buenos Aires</p>
+          <p>Argentina<br />Buenos Aires</p>
         </div>
-        
+
         <div class="info-card">
-          <i class="bi bi-clock"></i>
+          <i class="bi bi-clock info-card__icon"></i>
           <h3>Horario de atención</h3>
-          <p>Lunes a Viernes<br>9:00 - 18:00 hs</p>
+          <p>Lunes a Viernes<br />9:00 - 18:00 hs</p>
         </div>
-        
+
         <div class="info-card">
-          <i class="bi bi-chat-dots"></i>
+          <i class="bi bi-chat-dots info-card__icon"></i>
           <h3>Tiempo de respuesta</h3>
-          <p>Respondemos en<br>24-48 horas</p>
+          <p>Respondemos en<br />24-48 horas</p>
         </div>
-        
+
       </div>
     </div>
   </section>
-  
+
 </div>
