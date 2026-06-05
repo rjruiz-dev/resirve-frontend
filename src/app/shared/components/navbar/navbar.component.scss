@@ -1,25 +1,28 @@
 @import 'variables';
 @import 'mixins';
 
+// ============================================
+// NAVBAR BASE — Siempre oscuro (#1A1A2E)
+// ============================================
+
 .navbar {
   position: sticky;
   top: 0;
   z-index: $z-sticky;
-  background: $bg-secondary;
-  box-shadow: $shadow-sm;
-  border-bottom: 1px solid rgba($color-terracota, 0.1);
-  
-  @include fade-in(0.3s);
+  background: $navbar-bg;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  height: $navbar-height;
 }
 
 .navbar-container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 $spacing-md;
-  
-  @include flex-between;
-  min-height: $navbar-height;
-  
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: $spacing-md;
+
   @include respond-to('md') {
     padding: 0 $spacing-xl;
   }
@@ -30,40 +33,87 @@
 // ============================================
 
 .navbar-brand {
-  @include flex-column;
-  gap: 0;
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
-  transition: transform $transition-base;
-  
-  &:hover {
-    transform: translateY(-2px);
-  }
-  
+  flex-shrink: 0;
+
   .brand-re {
     font-family: $font-display;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: $font-weight-bold;
     color: $color-terracota;
     line-height: 1;
     display: inline;
   }
-  
+
   .brand-sirve {
     font-family: $font-display;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: $font-weight-bold;
-    color: $color-carbon;
+    color: #ffffff;
     line-height: 1;
     display: inline;
   }
-  
+
   .brand-tagline {
-    font-family: $font-body;
-    font-size: 0.75rem;
-    font-weight: $font-weight-normal;
-    color: $text-secondary;
+    font-size: 0.625rem;
+    color: rgba(255, 255, 255, 0.5);
     letter-spacing: 0.5px;
-    margin-top: -4px;
+    margin-top: -2px;
+  }
+
+  @include respond-to('md') {
+    .brand-re,
+    .brand-sirve {
+      font-size: 1.75rem;
+    }
+  }
+}
+
+// ============================================
+// SEARCH BAR — Centrada, oculta en móvil
+// ============================================
+
+.navbar-search {
+  display: none;
+  flex: 1;
+  max-width: 360px;
+  margin: 0 auto;
+  position: relative;
+
+  @include respond-to('md') {
+    display: flex;
+  }
+
+  i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.9rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 8px 16px 8px 38px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: $border-radius-full;
+    color: #ffffff;
+    font-family: $font-body;
+    font-size: $font-size-sm;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $teal-light;
+      background: rgba(255, 255, 255, 0.12);
+    }
   }
 }
 
@@ -81,25 +131,20 @@
   border: none;
   background: transparent;
   cursor: pointer;
-  transition: $transition-all;
-  
+  margin-left: auto;
+
   @include respond-to('lg') {
     display: none;
   }
-  
+
   &:hover {
-    background: rgba($color-terracota, 0.1);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: $border-radius-sm;
   }
-  
+
   i {
     font-size: 1.5rem;
-    color: $color-terracota;
-    transition: transform $transition-base;
-  }
-  
-  &:active i {
-    transform: scale(0.9);
+    color: #ffffff;
   }
 }
 
@@ -109,14 +154,14 @@
 
 .navbar-menu {
   display: none;
-  
+
   @include respond-to('lg') {
     display: flex;
     align-items: center;
-    gap: $spacing-lg;
+    gap: $spacing-md;
   }
-  
-  // Mobile menu (overlay)
+
+  // Mobile overlay
   &.active {
     display: flex;
     position: fixed;
@@ -124,24 +169,11 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: $bg-secondary;
+    background: $navbar-bg;
     flex-direction: column;
     padding: $spacing-xl;
-    gap: $spacing-xl;
-    
-    animation: slideDown 0.3s $ease-in-out-smooth;
-    box-shadow: $shadow-lg;
-  }
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+    gap: $spacing-lg;
+    z-index: $z-fixed;
   }
 }
 
@@ -153,13 +185,14 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  
-  @include flex-column;
+
+  display: flex;
+  flex-direction: column;
   gap: $spacing-sm;
-  
+
   @include respond-to('lg') {
     flex-direction: row;
-    gap: $spacing-md;
+    gap: $spacing-sm;
   }
 }
 
@@ -167,75 +200,58 @@
   .nav-link {
     display: flex;
     align-items: center;
-    gap: $spacing-sm;
-    padding: $spacing-md $spacing-lg;
-    
+    padding: $spacing-sm $spacing-md;
+
     font-family: $font-body;
     font-size: $font-size-base;
     font-weight: $font-weight-medium;
-    color: $text-primary;
+    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    
+
     border-radius: $border-radius-sm;
-    transition: $transition-all;
-    
-    @include respond-to('lg') {
-      padding: $spacing-sm $spacing-md;
-    }
-    
-    i {
-      font-size: 1.25rem;
-      color: $color-terracota;
-      transition: transform $transition-base;
-      
-      @include respond-to('lg') {
-        display: none;
-      }
-    }
-    
+    transition: all $transition-base;
+
     &:hover {
-      background: rgba($color-terracota, 0.08);
-      color: $color-terracota;
-      transform: translateX(4px);
-      
-      @include respond-to('lg') {
-        transform: translateY(-2px);
-      }
-      
-      i {
-        transform: scale(1.1);
-      }
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
     }
-    
+
     &.active {
-      background: linear-gradient(135deg, 
-        rgba($color-terracota, 0.15) 0%, 
-        rgba($color-terracota, 0.08) 100%
-      );
-      color: $color-terracota;
+      color: $teal-light;
+      background: rgba($teal-light, 0.12);
       font-weight: $font-weight-semibold;
     }
   }
 }
 
 // ============================================
-// ACTIONS (CTA Button)
+// THEME TOGGLE
 // ============================================
 
-.navbar-actions {
-  margin-top: $spacing-md;
-  
+.navbar-theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  cursor: pointer;
+  transition: background $transition-base;
+
   @include respond-to('lg') {
-    margin-top: 0;
+    width: 40px;
+    height: 40px;
   }
-  
-  .btn-primary {
-    @include button-variant($color-terracota, $text-light);
-    
-    width: 100%;
-    
-    @include respond-to('lg') {
-      width: auto;
-    }
+
+  i {
+    font-size: 1.2rem;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.16);
   }
 }

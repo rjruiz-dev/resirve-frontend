@@ -1,13 +1,14 @@
 /**
  * Navbar Component - ReSirve Frontend
- * 
- * Barra de navegación principal con diseño distintivo.
- * Responsive con menú hamburguesa en móvil.
+ *
+ * Barra de navegación principal con fondo oscuro fijo,
+ * barra de búsqueda centrada, toggle de tema y menú responsive.
  */
 
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ThemeService } from '@core/services';
 
 @Component({
   selector: 'app-navbar',
@@ -17,6 +18,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
+  /** Servicio de tema para light/dark mode. */
+  readonly themeService = inject(ThemeService);
+
   /**
    * Signal para controlar el estado del menú móvil
    */
