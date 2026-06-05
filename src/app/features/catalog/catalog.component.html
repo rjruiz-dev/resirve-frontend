@@ -1,160 +1,170 @@
 <div class="catalog">
   <div class="catalog__container">
-    
+
     <!-- Header -->
     <div class="catalog__header">
       <h1 class="catalog__title">Catálogo de Productos</h1>
       <p class="catalog__subtitle">{{ totalProducts() }} productos disponibles</p>
     </div>
-    
-    <!-- Filters Panel -->
-    <div class="filters-panel">
-      <div class="filters-panel__header">
-        <h3><i class="bi bi-funnel"></i> Filtros</h3>
-        <button class="btn-clear" (click)="clearFilters()">
-          <i class="bi bi-x-circle"></i> Limpiar
-        </button>
-      </div>
-      
-      <div class="filters-panel__content">
-        <!-- Search -->
-        <div class="filter-group">
-          <label>Buscar</label>
-          <input 
-            type="text"
-            class="form-control"
-            placeholder="Buscar productos..."
-            [value]="filters().search"
-            (input)="updateFilter('search', $any($event.target).value)"
-            (keyup.enter)="applyFilters()"
-          >
-        </div>
-        
-        <!-- Category -->
-        <div class="filter-group">
-          <label>Categoría</label>
-          <select 
-            class="form-select"
-            [value]="filters().category"
-            (change)="updateFilter('category', $any($event.target).value); applyFilters()">
-            <option value="">Todas las categorías</option>
-            @for (cat of categories(); track cat.id) {
-              <option [value]="cat.slug">{{ cat.name }}</option>
-            }
-          </select>
-        </div>
-        
-        <!-- Status -->
-        <div class="filter-group">
-          <label>Estado</label>
-          <select 
-            class="form-select"
-            [value]="filters().status || ''"
-            (change)="updateFilter('status', $any($event.target).value || undefined); applyFilters()">
-            <option value="">Todos</option>
-            <option value="disponible">Disponible</option>
-            <option value="reservado">Reservado</option>
-          </select>
-        </div>
-        
-        <!-- Condition -->
-        <div class="filter-group">
-          <label>Condición</label>
-          <select 
-            class="form-select"
-            [value]="filters().condition || ''"
-            (change)="updateFilter('condition', $any($event.target).value || undefined); applyFilters()">
-            <option value="">Todas</option>
-            <option value="como_nuevo">Como Nuevo</option>
-            <option value="buen_estado">Buen Estado</option>
-            <option value="funcional">Funcional</option>
-          </select>
-        </div>
-        
-        <!-- Price Range -->
-        <div class="filter-group">
-          <label>Rango de Precio</label>
-          <div class="price-range">
-            <input 
-              type="number"
-              class="form-control"
-              placeholder="Mín"
-              [value]="filters().price_min || ''"
-              (input)="updatePriceFilter('price_min', $any($event.target).value)"
-            >
-            <span>-</span>
-            <input 
-              type="number"
-              class="form-control"
-              placeholder="Máx"
-              [value]="filters().price_max || ''"
-              (input)="updatePriceFilter('price_max', $any($event.target).value)"
-            >
-          </div>
-          <button class="btn-apply" (click)="applyFilters()">Aplicar</button>
-        </div>
-        
-        <!-- Sort -->
-        <div class="filter-group">
-          <label>Ordenar por</label>
-          <select 
-            class="form-select"
-            [value]="filters().sort"
-            (change)="updateFilter('sort', $any($event.target).value); applyFilters()">
-            <option value="created_at">Más recientes</option>
-            <option value="price">Precio</option>
-            <option value="title">Nombre</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Products Grid -->
-    <div class="catalog__content">
-      @if (loading()) {
-        <div class="catalog__loading">
-          <p>Cargando productos...</p>
-        </div>
-      } @else if (products().length === 0) {
-        <div class="catalog__empty">
-          <i class="bi bi-inbox"></i>
-          <h3>No se encontraron productos</h3>
-          <p>Intenta ajustar los filtros de búsqueda</p>
-          <button class="btn btn--primary" (click)="clearFilters()">
-            Ver todos los productos
+
+    <div class="catalog__layout">
+
+      <!-- Filters Sidebar -->
+      <aside class="filters-panel">
+        <div class="filters-panel__header">
+          <h3><i class="bi bi-funnel"></i> Filtros</h3>
+          <button class="btn-clear" (click)="clearFilters()">
+            <i class="bi bi-x-circle"></i> Limpiar
           </button>
         </div>
-      } @else {
-        <div class="products-grid">
-          @for (product of products(); track product.id) {
-            <app-product-card [product]="product" />
-          }
+
+        <div class="filters-panel__content">
+          <!-- Search -->
+          <div class="filter-group">
+            <label>Buscar</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Buscar productos..."
+              [value]="filters().search"
+              (input)="updateFilter('search', $any($event.target).value)"
+              (keyup.enter)="applyFilters()"
+            />
+          </div>
+
+          <!-- Category -->
+          <div class="filter-group">
+            <label>Categoría</label>
+            <select
+              class="form-select"
+              [value]="filters().category"
+              (change)="updateFilter('category', $any($event.target).value); applyFilters()"
+            >
+              <option value="">Todas las categorías</option>
+              @for (cat of categories(); track cat.id) {
+                <option [value]="cat.slug">{{ cat.name }}</option>
+              }
+            </select>
+          </div>
+
+          <!-- Status -->
+          <div class="filter-group">
+            <label>Estado</label>
+            <select
+              class="form-select"
+              [value]="filters().status || ''"
+              (change)="updateFilter('status', $any($event.target).value || undefined); applyFilters()"
+            >
+              <option value="">Todos</option>
+              <option value="disponible">Disponible</option>
+              <option value="reservado">Reservado</option>
+            </select>
+          </div>
+
+          <!-- Condition -->
+          <div class="filter-group">
+            <label>Condición</label>
+            <select
+              class="form-select"
+              [value]="filters().condition || ''"
+              (change)="updateFilter('condition', $any($event.target).value || undefined); applyFilters()"
+            >
+              <option value="">Todas</option>
+              <option value="como_nuevo">Como Nuevo</option>
+              <option value="buen_estado">Buen Estado</option>
+              <option value="funcional">Funcional</option>
+            </select>
+          </div>
+
+          <!-- Price Range -->
+          <div class="filter-group">
+            <label>Rango de Precio</label>
+            <div class="price-range">
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Mín"
+                [value]="filters().price_min || ''"
+                (input)="updatePriceFilter('price_min', $any($event.target).value)"
+              />
+              <span>-</span>
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Máx"
+                [value]="filters().price_max || ''"
+                (input)="updatePriceFilter('price_max', $any($event.target).value)"
+              />
+            </div>
+            <button class="btn-apply" (click)="applyFilters()">Aplicar</button>
+          </div>
+
+          <!-- Sort -->
+          <div class="filter-group">
+            <label>Ordenar por</label>
+            <select
+              class="form-select"
+              [value]="filters().sort"
+              (change)="updateFilter('sort', $any($event.target).value); applyFilters()"
+            >
+              <option value="created_at">Más recientes</option>
+              <option value="price">Precio</option>
+              <option value="title">Nombre</option>
+            </select>
+          </div>
         </div>
-        
-        <!-- Pagination -->
-        @if (totalPages() > 1) {
-          <div class="pagination">
-            <button 
-              class="pagination__btn"
-              [disabled]="currentPage() === 1"
-              (click)="goToPage(currentPage() - 1)">
-              <i class="bi bi-chevron-left"></i>
-            </button>
-            
-            <span class="pagination__info">
-              Página {{ currentPage() }} de {{ totalPages() }}
-            </span>
-            
-            <button 
-              class="pagination__btn"
-              [disabled]="currentPage() === totalPages()"
-              (click)="goToPage(currentPage() + 1)">
-              <i class="bi bi-chevron-right"></i>
+      </aside>
+
+      <!-- Products Grid -->
+      <div class="catalog__content">
+        @if (loading()) {
+          <div class="catalog__loading">
+            <p>Cargando productos...</p>
+          </div>
+        } @else if (products().length === 0) {
+          <div class="catalog__empty">
+            <i class="bi bi-inbox"></i>
+            <h3>No se encontraron productos</h3>
+            <p>Intenta ajustar los filtros de búsqueda</p>
+            <button class="btn btn--primary" (click)="clearFilters()">
+              Ver todos los productos
             </button>
           </div>
+        } @else {
+          <div class="products-grid">
+            @for (product of products(); track product.id) {
+              <app-product-card [product]="product" />
+            }
+          </div>
+
+          <!-- Pagination -->
+          @if (totalPages() > 1) {
+            <div class="pagination">
+              <button
+                class="pagination__btn"
+                [disabled]="currentPage() === 1"
+                (click)="goToPage(currentPage() - 1)"
+              >
+                <i class="bi bi-chevron-left"></i>
+              </button>
+
+              <span class="pagination__info">
+                Página {{ currentPage() }} de {{ totalPages() }}
+              </span>
+
+              <button
+                class="pagination__btn"
+                [disabled]="currentPage() === totalPages()"
+                (click)="goToPage(currentPage() + 1)"
+              >
+                <i class="bi bi-chevron-right"></i>
+              </button>
+            </div>
+          }
         }
-      }
+      </div>
+
     </div>
-    
+
   </div>
 </div>

@@ -1,8 +1,13 @@
 @import 'variables';
 @import 'mixins';
 
+// ============================================
+// CATALOG LAYOUT
+// ============================================
+
 .catalog {
   min-height: 60vh;
+  padding: $spacing-3xl 0;
 }
 
 .catalog__container {
@@ -18,37 +23,62 @@
 
 .catalog__title {
   @include heading-display;
-  font-size: $h1-size;
-  color: $text-primary;
+  font-size: 2.5rem;
+  color: var(--text-primary);
   margin-bottom: $spacing-sm;
+
+  @include respond-to('md') {
+    font-size: 3.5rem;
+  }
 }
 
 .catalog__subtitle {
   font-size: $font-size-lg;
-  color: $text-secondary;
+  color: var(--text-secondary);
 }
 
+.catalog__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-xl;
+
+  @include respond-to('lg') {
+    grid-template-columns: 280px 1fr;
+  }
+}
+
+// ============================================
+// FILTERS PANEL
+// ============================================
+
 .filters-panel {
-  background: $bg-secondary;
-  border-radius: $border-radius-lg;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
   padding: $spacing-xl;
-  margin-bottom: $spacing-2xl;
-  box-shadow: $shadow-md;
+  box-shadow: var(--shadow-sm);
+  height: fit-content;
+  position: sticky;
+  top: calc($navbar-height + $spacing-lg);
+
+  @include respond-to('lg') {
+    position: sticky;
+  }
 }
 
 .filters-panel__header {
   @include flex-between;
   margin-bottom: $spacing-lg;
-  
+
   h3 {
     display: flex;
     align-items: center;
     gap: $spacing-sm;
     font-size: $font-size-xl;
     margin: 0;
-    
+    color: var(--text-primary);
+
     i {
-      color: $color-terracota;
+      color: var(--color-terracota);
     }
   }
 }
@@ -60,29 +90,21 @@
   padding: $spacing-sm $spacing-md;
   border: none;
   background: transparent;
-  color: $text-secondary;
+  color: var(--text-secondary);
   cursor: pointer;
   border-radius: $border-radius-sm;
-  transition: $transition-all;
-  
+  transition: all $transition-base;
+
   &:hover {
-    background: rgba($color-danger, 0.1);
-    color: $color-danger;
+    background: rgba(217, 83, 79, 0.1);
+    color: var(--color-danger, #d9534f);
   }
 }
 
 .filters-panel__content {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: $spacing-lg;
-  
-  @include respond-to('md') {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  @include respond-to('lg') {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
 .filter-group {
@@ -90,13 +112,36 @@
     display: block;
     font-size: $font-size-sm;
     font-weight: $font-weight-semibold;
-    color: $text-primary;
+    color: var(--text-primary);
     margin-bottom: $spacing-xs;
   }
-  
+
   .form-control,
   .form-select {
-    @include input-base;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: $font-body;
+    font-size: $font-size-base;
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+    transition: border-color $transition-base, box-shadow $transition-base;
+
+    &:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(10, 126, 140, 0.2);
+    }
+
+    &::placeholder {
+      color: var(--text-muted);
+    }
+  }
+
+  .form-select {
+    cursor: pointer;
+    appearance: auto;
   }
 }
 
@@ -105,16 +150,39 @@
   align-items: center;
   gap: $spacing-sm;
   margin-bottom: $spacing-sm;
-  
+
   span {
-    color: $text-secondary;
+    color: var(--text-secondary);
+  }
+
+  input {
+    min-width: 0;
   }
 }
 
 .btn-apply {
-  @include button-variant($color-terracota, $text-light);
   width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $btn-padding-y $btn-padding-x;
+  border: none;
+  border-radius: $btn-border-radius;
+  font-family: $font-body;
+  font-weight: $font-weight-semibold;
+  background: var(--color-terracota);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all $transition-base;
+
+  &:hover {
+    background: var(--color-terracota-dark);
+  }
 }
+
+// ============================================
+// PRODUCTS GRID
+// ============================================
 
 .catalog__content {
   min-height: 400px;
@@ -124,19 +192,19 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: $spacing-xl;
-  
+
   @include respond-to('sm') {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   @include respond-to('lg') {
     grid-template-columns: repeat(3, 1fr);
   }
-  
-  @include respond-to('xl') {
-    grid-template-columns: repeat(4, 1fr);
-  }
 }
+
+// ============================================
+// LOADING & EMPTY STATES
+// ============================================
 
 .catalog__loading,
 .catalog__empty {
@@ -145,23 +213,27 @@
   gap: $spacing-lg;
   padding: $spacing-3xl;
   text-align: center;
-  
+
   i {
     font-size: 4rem;
-    color: $text-muted;
+    color: var(--text-muted);
   }
-  
+
   h3 {
     font-size: $h3-size;
-    color: $text-primary;
+    color: var(--text-primary);
     margin: 0;
   }
-  
+
   p {
-    color: $text-secondary;
+    color: var(--text-secondary);
     margin: 0;
   }
 }
+
+// ============================================
+// PAGINATION
+// ============================================
 
 .pagination {
   @include flex-center;
@@ -171,30 +243,37 @@
 
 .pagination__btn {
   @include button-base;
-  background: $bg-secondary;
-  color: $text-primary;
-  border: 1px solid $border-color;
-  
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+
   &:hover:not(:disabled) {
-    background: $color-terracota;
-    color: $text-light;
-    border-color: $color-terracota;
+    background: var(--color-terracota);
+    color: #ffffff;
+    border-color: var(--color-terracota);
   }
-  
+
   &:disabled {
     opacity: 0.4;
+    cursor: not-allowed;
   }
 }
 
 .pagination__info {
   font-size: $font-size-base;
-  color: $text-secondary;
+  color: var(--text-secondary);
 }
 
-.btn {
+// ============================================
+// BUTTONS
+// ============================================
+
+.btn--primary {
   @include button-base;
-  
-  &--primary {
-    @include button-variant($color-terracota, $text-light);
+  background: var(--color-terracota);
+  color: #ffffff;
+
+  &:hover:not(:disabled) {
+    background: var(--color-terracota-dark);
   }
 }
