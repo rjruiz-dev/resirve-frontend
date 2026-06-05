@@ -1,15 +1,15 @@
 @import 'variables';
 @import 'mixins';
 
+// ============================================
+// NOT FOUND PAGE
+// ============================================
+
 .not-found-page {
   min-height: 80vh;
   @include flex-center;
   padding: $spacing-3xl 0;
-  background: linear-gradient(135deg,
-    rgba($color-terracota, 0.05) 0%,
-    rgba($color-crema, 1) 50%,
-    rgba($color-verde-musgo, 0.05) 100%
-  );
+  background: var(--bg-primary);
 }
 
 .not-found__container {
@@ -22,79 +22,91 @@
   text-align: center;
 }
 
+// ============================================
+// ERROR CODE (gradient-404)
+// ============================================
+
 .error-code {
   font-family: $font-display;
-  font-size: 10rem;
+  font-size: 8rem;
   font-weight: $font-weight-bold;
   line-height: 1;
-  background: linear-gradient(135deg,
-    $color-terracota 0%,
-    $color-mostaza 100%
-  );
+  background: linear-gradient(135deg, #e07856 0%, #d4a574 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: $spacing-xl;
-  
+  margin-bottom: $spacing-lg;
+
   @include respond-to('md') {
     font-size: 12rem;
   }
 }
 
+// ============================================
+// ERROR TITLE & MESSAGE
+// ============================================
+
 .error-title {
   @include heading-display;
-  font-size: $h1-size;
-  color: $text-primary;
-  margin-bottom: $spacing-md;
+  font-size: 1.75rem;
+  color: var(--text-primary);
+  margin: 0 0 $spacing-md;
+
+  @include respond-to('md') {
+    font-size: $h2-size;
+  }
 }
 
 .error-message {
   font-size: $font-size-lg;
-  color: $text-secondary;
+  color: var(--text-secondary);
   margin-bottom: $spacing-3xl;
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
 }
 
+// ============================================
+// ILLUSTRATION (float keyframe)
+// ============================================
+
 .illustration {
   position: relative;
   width: 200px;
   height: 200px;
   margin: 0 auto $spacing-3xl;
-  
-  i {
+
+  &__static {
     position: absolute;
+    top: 0;
+    left: 0;
     font-size: 6rem;
-    
-    &:first-child {
-      top: 0;
-      left: 0;
-      color: rgba($color-terracota, 0.2);
+    color: rgba(224, 120, 86, 0.15);
+
+    [data-theme='dark'] & {
+      color: rgba(224, 120, 86, 0.25);
     }
-    
-    &:last-child {
-      bottom: 0;
-      right: 0;
-      color: $color-terracota;
-      animation: float 3s ease-in-out infinite;
-    }
+  }
+
+  &__float {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 6rem;
+    color: var(--color-terracota);
+    animation: float 3s ease-in-out infinite;
   }
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
+// ============================================
+// SUGGESTIONS
+// ============================================
 
 .suggestions {
   h3 {
     font-size: $font-size-xl;
     font-weight: $font-weight-semibold;
+    color: var(--text-primary);
     margin-bottom: $spacing-xl;
   }
 }
@@ -103,7 +115,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: $spacing-md;
-  
+
   @include respond-to('sm') {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -114,30 +126,31 @@
   align-items: center;
   gap: $spacing-sm;
   padding: $spacing-xl;
-  background: $bg-secondary;
-  border-radius: $border-radius-lg;
-  box-shadow: $shadow-sm;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
   text-decoration: none;
-  color: $text-primary;
-  transition: $transition-all;
-  
+  color: var(--text-primary);
+  transition: transform $transition-base, box-shadow $transition-base,
+    color $transition-base;
+
   &:hover {
     transform: translateY(-4px);
-    box-shadow: $shadow-hover;
-    color: $color-terracota;
-    
+    box-shadow: var(--shadow-md);
+    color: var(--color-terracota);
+
     i {
-      color: $color-terracota;
+      color: var(--color-terracota);
       transform: scale(1.1);
     }
   }
-  
+
   i {
     font-size: 2rem;
-    color: $text-secondary;
-    transition: $transition-all;
+    color: var(--text-secondary);
+    transition: transform $transition-base, color $transition-base;
   }
-  
+
   span {
     font-weight: $font-weight-semibold;
   }
