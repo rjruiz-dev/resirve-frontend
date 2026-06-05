@@ -3,7 +3,7 @@
   <div class="hero__container">
     <div class="hero__content">
       <h1 class="hero__title">
-        Productos usados <br>
+        Productos usados <br />
         <span class="hero__title--accent">con historia</span>
       </h1>
       <p class="hero__description">
@@ -21,19 +21,67 @@
         </a>
       </div>
     </div>
-    
+
     <div class="hero__stats">
-      <div class="stat">
-        <i class="bi bi-check-circle-fill"></i>
-        <span class="stat__number">Productos verificados</span>
+      <div class="hero-stat">
+        <i class="bi bi-check-circle-fill hero-stat__icon"></i>
+        <span class="hero-stat__text">Productos verificados</span>
       </div>
-      <div class="stat">
-        <i class="bi bi-hand-thumbs-up-fill"></i>
-        <span class="stat__number">Compra directa</span>
+      <div class="hero-stat">
+        <i class="bi bi-hand-thumbs-up-fill hero-stat__icon"></i>
+        <span class="hero-stat__text">Compra directa</span>
       </div>
-      <div class="stat">
-        <i class="bi bi-shield-check"></i>
-        <span class="stat__number">Transacciones seguras</span>
+      <div class="hero-stat">
+        <i class="bi bi-shield-check hero-stat__icon"></i>
+        <span class="hero-stat__text">Transacciones seguras</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ¿Por qué ReSirve? -->
+<section class="section why-section">
+  <div class="container">
+    <div class="section__header">
+      <h2 class="section__title">¿Por qué ReSirve?</h2>
+      <p class="section__description">
+        Somos más que un marketplace. Somos una comunidad que valora la honestidad,
+        la sustentabilidad y la historia detrás de cada objeto.
+      </p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-card__icon">
+          <i class="bi bi-shield-check"></i>
+        </div>
+        <h3 class="why-card__title">Compra Segura</h3>
+        <p class="why-card__description">
+          Todos los productos son verificados antes de publicarse.
+          Transacciones directas y transparentes.
+        </p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card__icon">
+          <i class="bi bi-recycle"></i>
+        </div>
+        <h3 class="why-card__title">Sustentable</h3>
+        <p class="why-card__description">
+          Dale una segunda vida a productos de calidad.
+          Contribuye a reducir el desperdicio.
+        </p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card__icon">
+          <i class="bi bi-heart"></i>
+        </div>
+        <h3 class="why-card__title">Con Historia</h3>
+        <p class="why-card__description">
+          Cada producto tiene su propia historia.
+          Compra artículos con significado y valor.
+        </p>
       </div>
     </div>
   </div>
@@ -52,13 +100,13 @@
           Nuestra selección especial de productos en excelente estado
         </p>
       </div>
-      
+
       <div class="products-grid">
         @for (product of featuredProducts(); track product.id) {
           <app-product-card [product]="product" />
         }
       </div>
-      
+
       <div class="section__footer">
         <a routerLink="/catalogo" class="btn btn--outline">
           Ver todos los productos
@@ -82,7 +130,7 @@
           Encuentra lo que buscas navegando por categorías
         </p>
       </div>
-      
+
       <div class="categories-grid">
         @for (category of categories(); track category.id) {
           <a [routerLink]="['/categoria', category.slug]" class="category-card">
@@ -115,7 +163,7 @@
           Los últimos productos que se sumaron al catálogo
         </p>
       </div>
-      
+
       <div class="products-grid">
         @for (product of recentProducts(); track product.id) {
           <app-product-card [product]="product" />
@@ -137,7 +185,7 @@
         </p>
       </div>
       <div class="cta__actions">
-        <a routerLink="/contacto" class="btn btn--primary btn--large">
+        <a routerLink="/contacto" class="btn btn--primary btn--lg">
           <i class="bi bi-envelope-fill"></i>
           Contáctanos
         </a>
