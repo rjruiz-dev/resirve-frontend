@@ -13,6 +13,12 @@
 @import 'mixins';
 
 // ============================================
+// DARK MODE TOKENS — CSS custom properties
+// ============================================
+
+@import 'dark-tokens';
+
+// ============================================
 // IMPORTAR BOOTSTRAP PERSONALIZADO
 // ============================================
 
@@ -51,8 +57,9 @@ body {
   font-size: $font-size-base;
   font-weight: $font-weight-normal;
   line-height: 1.6;
-  color: $text-primary;
-  background-color: $bg-primary;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  transition: background-color $transition-base, color $transition-base;
   @include paper-texture;
 }
 
@@ -63,6 +70,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   @include heading-display;
   margin-bottom: $spacing-md;
+  color: var(--text-primary);
 }
 
 h1 {
@@ -99,15 +107,16 @@ h6 {
 
 p {
   margin-bottom: $spacing-md;
+  color: var(--text-primary);
 }
 
 a {
-  color: $color-terracota;
+  color: var(--color-terracota);
   text-decoration: none;
   transition: color $transition-fast;
-  
+
   &:hover {
-    color: $terracota-dark;
+    color: var(--color-terracota-dark);
     text-decoration: underline;
   }
 }
@@ -339,7 +348,7 @@ img {
 // ============================================
 
 *:focus-visible {
-  outline: 2px solid $color-terracota;
+  outline: 2px solid $color-teal;
   outline-offset: 2px;
 }
 
@@ -358,12 +367,19 @@ img {
 }
 
 // ============================================
-// DARK MODE SUPPORT (OPCIONAL - PREPARADO)
+// DARK MODE — Theme transition on body
 // ============================================
 
-@media (prefers-color-scheme: dark) {
-  // Aquí podrían ir estilos para dark mode si decides implementarlo
-  // Por ahora solo preparamos la estructura
+// La transición principal está en body {} arriba.
+// Componentes específicos deben usar var() para
+// background-color, color, border-color, y box-shadow
+// para que la transición se aplique automáticamente.
+
+[data-theme="dark"] {
+  // Scrollbar se adapta al modo oscuro
+  ::-webkit-scrollbar-track {
+    background: var(--bg-tertiary);
+  }
 }
 
 // ============================================

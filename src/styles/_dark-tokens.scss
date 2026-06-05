@@ -1,0 +1,110 @@
+/**
+ * _dark-tokens.scss — ReSirve Frontend
+ *
+ * CSS custom properties para los modos light y dark.
+ * Expone todos los tokens semánticos del design system §2
+ * bajo :root (light) y [data-theme="dark"] (dark).
+ */
+
+// ============================================
+// LIGHT MODE (default — :root)
+// ============================================
+
+:root {
+  // Backgrounds
+  --bg-primary: #FAFAFA;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #F5F0EB;
+
+  // Text
+  --text-primary: #1A1A2E;
+  --text-secondary: #6B7280;
+  --text-muted: #9CA3AF;
+  --text-light: #FFFFFF;
+
+  // Borders
+  --border: #E5E7EB;
+  --border-focus: #0A7E8C;
+
+  // Shadows (tinte terracota en light mode)
+  --shadow-color: rgba(224, 120, 86, 0.12);
+  --shadow-sm: 0 2px 8px rgba(224, 120, 86, 0.08);
+  --shadow-md: 0 4px 16px rgba(224, 120, 86, 0.12);
+  --shadow-lg: 0 8px 24px rgba(224, 120, 86, 0.16);
+  --shadow-xl: 0 12px 40px rgba(224, 120, 86, 0.20);
+
+  // Hero gradients (light)
+  --bg-hero-about: linear-gradient(180deg, rgba(224, 120, 86, 0.08) 0%, #FAFAFA 100%);
+  --bg-hero-contact: linear-gradient(180deg, rgba(107, 142, 111, 0.08) 0%, #FAFAFA 100%);
+
+  // Functional colors
+  --color-success: #6B8E6F;
+  --color-warning: #D4A574;
+  --color-danger: #D9534F;
+  --color-info: #0A7E8C;
+
+  // Navbar & Footer (siempre oscuros)
+  --navbar-bg: #1A1A2E;
+  --navbar-text: #FFFFFF;
+  --footer-bg: #1A1A2E;
+  --footer-text: #FAF7F2;
+
+  // Primavera (brand colors, iguales en ambos modos)
+  --color-terracota: #E07856;
+  --color-terracota-light: #EB9A82;
+  --color-terracota-dark: #C55E3E;
+  --color-teal: #0A7E8C;
+  --color-teal-light: #3DA8B5;
+  --color-teal-dark: #087A86;
+  --color-verde-musgo: #6B8E6F;
+  --color-verde-light: #8FB092;
+  --color-mostaza: #D4A574;
+  --color-mostaza-light: #E2C19A;
+
+  // Radii
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  // Transitions
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+// ============================================
+// DARK MODE
+// ============================================
+
+[data-theme="dark"] {
+  // Backgrounds
+  --bg-primary: #0F1729;
+  --bg-secondary: #1A1A2E;
+  --bg-tertiary: #162032;
+
+  // Text
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+
+  // Borders
+  --border: rgba(255, 255, 255, 0.1);
+  --border-focus: #3DA8B5;
+
+  // Shadows (neutro oscuro en dark mode, sin tinte)
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.5);
+
+  // Hero gradients (dark)
+  --bg-hero-about: linear-gradient(180deg, rgba(224, 120, 86, 0.12) 0%, #0F1729 100%);
+  --bg-hero-contact: linear-gradient(180deg, rgba(10, 126, 140, 0.12) 0%, #0F1729 100%);
+
+  // Functional colors (ajustados para dark mode)
+  --color-danger: #EF4444;
+  --color-info: #3DA8B5;
+}
