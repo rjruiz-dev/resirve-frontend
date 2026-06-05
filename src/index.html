@@ -36,6 +36,16 @@
   <!-- Preconnect a Google Fonts para mejorar performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Script inicial de tema: previene FOUC antes de que Angular cargue -->
+  <script>
+    (function() {
+      var saved = localStorage.getItem('resirve-theme');
+      var preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      var theme = saved || preferred;
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
 </head>
 <body>
   <!-- El componente raíz de Angular se renderiza aquí -->
