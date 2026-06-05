@@ -190,6 +190,52 @@
 }
 
 // ============================================
+// BOTONES — TAMAÑOS
+// ============================================
+
+@mixin button-sm {
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-sm;
+}
+
+@mixin button-lg {
+  padding: $spacing-md $spacing-xl;
+  font-size: $font-size-lg;
+}
+
+// ============================================
+// DARK MODE
+// ============================================
+
+/// Aplica sombra que cambia entre light y dark automáticamente.
+/// En light mode usa $shadow-light, en dark mode usa $shadow-dark.
+@mixin dark-aware-shadow($shadow-light: $shadow-sm, $shadow-dark: $shadow-sm-dark) {
+  box-shadow: $shadow-light;
+
+  [data-theme='dark'] & {
+    box-shadow: $shadow-dark;
+  }
+}
+
+/// Aplica background que cambia entre light y dark automáticamente.
+@mixin dark-aware-bg($bg-light: $bg-secondary, $bg-dark: #1A1A2E) {
+  background-color: $bg-light;
+
+  [data-theme='dark'] & {
+    background-color: $bg-dark;
+  }
+}
+
+/// Aplica color de texto que cambia entre light y dark automáticamente.
+@mixin dark-aware-text($text-light: $text-primary, $text-dark: #F8FAFC) {
+  color: $text-light;
+
+  [data-theme='dark'] & {
+    color: $text-dark;
+  }
+}
+
+// ============================================
 // ANIMACIONES
 // ============================================
 
@@ -236,6 +282,40 @@
   }
 }
 
+/// Animación con retraso escalonado para listas de elementos.
+/// @param $index — índice del elemento (1-based)
+/// @param $base-delay — retraso base en segundos (default: 0.1s)
+@mixin stagger-animation($index, $base-delay: 0.1s) {
+  animation-delay: #{$index * $base-delay};
+}
+
+/// Keyframe float para iconos (ej: 404 page).
+/// Uso: animation: float 3s ease-in-out infinite;
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/// Keyframe fade-in-up para entradas suaves.
+/// Uso: animation: fade-in-up 0.5s ease-out;
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 // ============================================
 // FORMS
 // ============================================
@@ -254,7 +334,7 @@
   &:focus {
     outline: none;
     border-color: $input-focus-border-color;
-    box-shadow: 0 0 0 3px rgba($color-terracota, 0.1);
+    box-shadow: 0 0 0 3px rgba($color-teal, 0.2);
   }
   
   &::placeholder {
@@ -378,7 +458,7 @@
 
 @mixin focus-outline {
   &:focus-visible {
-    outline: 2px solid $color-terracota;
+    outline: 2px solid $color-teal;
     outline-offset: 2px;
   }
 }
